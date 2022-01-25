@@ -22,19 +22,61 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.multi.MultiLookAndFeel;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
+import Modelos.*;
+import Datos.*;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 
 /**
  *
  * @author eduardo
  */
-public class Menu extends javax.swing.JFrame {
+public class Main extends javax.swing.JFrame {
+    
+    //Modelos de tablas
+    DefaultTableModel modeloTablaTipoPrecio = new DefaultTableModel();
+    
+    //Cargar modelos de tablas
+    private void CargarColumnasTipoPrecio(){
+       modeloTablaTipoPrecio.addColumn("num");
+       modeloTablaTipoPrecio.addColumn("Tipo de precio");
+       modeloTablaTipoPrecio.addColumn("Porcentaje %");
+       
+       FuncionesTipoPrecio funcionesTipoPrecio = new FuncionesTipoPrecio();
+       ArrayList<TipoDePrecio> lista = funcionesTipoPrecio.MostrarTipoPrecio();
+       
+       int contador =lista.size();
+       modeloTablaTipoPrecio.setNumRows(contador);
+       for (int i = 0; i < contador; i++) {
+            TipoDePrecio tipoDePrecio = lista.get(i);
+            modeloTablaTipoPrecio.setValueAt(tipoDePrecio.getId_tipo_de_precio(), i, 0);
+            modeloTablaTipoPrecio.setValueAt(tipoDePrecio.getTipo(), i, 1);
+            modeloTablaTipoPrecio.setValueAt(tipoDePrecio.getPaga(), i, 2);
+       }
+       
+       TableColumn columna = TablaPreciosVenta.getColumnModel().getColumn(0);
+       columna.setMaxWidth(0);
+       columna.setMinWidth(0);
+       columna.setPreferredWidth(0);
+       
+    }
 
     /**
      * Creates new form Login
      */
-    public Menu() {
+    public Main() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        //Cargar tablas
+        CargarColumnasTipoPrecio();
+        
+        //Componentes a ocultar
+        lblEditandoPreciosVenta.setVisible(false);
+        lblTipoPrecioVenta.setVisible(false);
     }
 
     /**
@@ -68,8 +110,9 @@ public class Menu extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaPreciosVenta = new javax.swing.JTable();
         BtnEliminarPrecioVentaj = new javax.swing.JButton();
-        lblPrecioVenta = new javax.swing.JLabel();
+        lblTipoPrecioVenta = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        lblEditandoPreciosVenta = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         PanelTipoProducto = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -158,38 +201,52 @@ public class Menu extends javax.swing.JFrame {
 
         BtnLimpiarPanelPRecioVenta.setIcon(new javax.swing.ImageIcon("/images/limpiar.png")); // NOI18N
         BtnLimpiarPanelPRecioVenta.setText("Limpiar todo");
+        BtnLimpiarPanelPRecioVenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnLimpiarPanelPRecioVentaMouseClicked(evt);
+            }
+        });
         PanelTipoPrecio.add(BtnLimpiarPanelPRecioVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 510, 230, 50));
 
         BtnGuardarPrecioVenta.setIcon(new javax.swing.ImageIcon("/images/save.png")); // NOI18N
         BtnGuardarPrecioVenta.setText("Guardar");
+        BtnGuardarPrecioVenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnGuardarPrecioVentaMouseClicked(evt);
+            }
+        });
         PanelTipoPrecio.add(BtnGuardarPrecioVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 250, -1, 50));
         PanelTipoPrecio.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, 350, 10));
         PanelTipoPrecio.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, 350, 10));
 
-        TablaPreciosVenta.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        TablaPreciosVenta.setModel(modeloTablaTipoPrecio);
+        TablaPreciosVenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaPreciosVentaMouseClicked(evt);
             }
-        ));
+        });
         jScrollPane1.setViewportView(TablaPreciosVenta);
 
         PanelTipoPrecio.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, 490, 140));
 
         BtnEliminarPrecioVentaj.setIcon(new javax.swing.ImageIcon("/images/eliminar.png")); // NOI18N
         BtnEliminarPrecioVentaj.setText("Eliminar");
+        BtnEliminarPrecioVentaj.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnEliminarPrecioVentajMouseClicked(evt);
+            }
+        });
         PanelTipoPrecio.add(BtnEliminarPrecioVentaj, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 250, -1, 50));
 
-        lblPrecioVenta.setText("0");
-        PanelTipoPrecio.add(lblPrecioVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 130, -1, -1));
+        lblTipoPrecioVenta.setText("0");
+        PanelTipoPrecio.add(lblTipoPrecioVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 130, -1, -1));
 
         jLabel3.setText("%");
         PanelTipoPrecio.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 190, -1, -1));
+
+        lblEditandoPreciosVenta.setForeground(new java.awt.Color(251, 0, 0));
+        lblEditandoPreciosVenta.setText("jLabel4");
+        PanelTipoPrecio.add(lblEditandoPreciosVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, -1, -1));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -470,6 +527,66 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BtnGuardarPrecioVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnGuardarPrecioVentaMouseClicked
+        String tipo = txtTipoDePrecioPV.getText().trim();
+        int paga = Integer.parseInt(txtPagaPV.getText().trim());
+        
+        TipoDePrecio tipoDeprecio = new TipoDePrecio(Integer.parseInt(lblTipoPrecioVenta.getText()), tipo, paga);
+        FuncionesTipoPrecio funcionesTipoPrecio = new FuncionesTipoPrecio();
+        
+        if (Integer.parseInt(lblTipoPrecioVenta.getText()) == 0) {
+            if (funcionesTipoPrecio.GuardarTipoPrecio(tipoDeprecio)) {
+                JOptionPane.showMessageDialog(null,"Se ha registrado correctamente el tipo de precio "+tipo);
+                LimpiarFormularioTipoPrecio();
+            }else{
+                 JOptionPane.showMessageDialog(null, "No se ha podido guardar la informacion, verifique la informacion","Error!", JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            if (funcionesTipoPrecio.ActualizarTipoPrecio(tipoDeprecio)) {
+                JOptionPane.showMessageDialog(null,"Se ha actualizado correctamente el tipo de precio "+tipo);
+                LimpiarFormularioTipoPrecio();
+            }else{
+                JOptionPane.showMessageDialog(null, "No se ha podido guardar la informacion, verifique la informacion","Error!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_BtnGuardarPrecioVentaMouseClicked
+
+    private void BtnLimpiarPanelPRecioVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnLimpiarPanelPRecioVentaMouseClicked
+        LimpiarFormularioTipoPrecio();
+    }//GEN-LAST:event_BtnLimpiarPanelPRecioVentaMouseClicked
+
+    private void TablaPreciosVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaPreciosVentaMouseClicked
+        int index = TablaPreciosVenta.getSelectedRow();
+        TableModel model = TablaPreciosVenta.getModel();
+        
+        int id = Integer.parseInt(model.getValueAt(index,0).toString());
+        String tipo = model.getValueAt(index,1).toString();
+        int paga = Integer.parseInt(model.getValueAt(index,2).toString());
+        
+        lblTipoPrecioVenta.setText(""+id);
+        txtTipoDePrecioPV.setText(tipo);
+        txtPagaPV.setText(""+paga);
+        
+        lblEditandoPreciosVenta.setVisible(true);
+        lblEditandoPreciosVenta.setText("Editando informacion de "+tipo);
+    }//GEN-LAST:event_TablaPreciosVentaMouseClicked
+
+    private void BtnEliminarPrecioVentajMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnEliminarPrecioVentajMouseClicked
+        FuncionesTipoPrecio funcionesTipoPrecio = new FuncionesTipoPrecio();
+        
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog (null, "¿Desea eliminar el tipo de precio?","Advertencia",dialogButton);
+        
+        if(dialogResult == JOptionPane.YES_OPTION){
+            if (funcionesTipoPrecio.EliminarTipoPrecio(Integer.parseInt(lblTipoPrecioVenta.getText()))) {
+                JOptionPane.showMessageDialog(null,"Se ha eliminado correctamente el tipo de precio ");
+                LimpiarFormularioTipoPrecio();
+            }else{
+                JOptionPane.showMessageDialog(null, "No es posible eliminar el tipo de precio","Error!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_BtnEliminarPrecioVentajMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -487,14 +604,16 @@ public class Menu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -503,12 +622,25 @@ public class Menu extends javax.swing.JFrame {
             public void run() {
                 try {
                     UIManager.setLookAndFeel(new MintLookAndFeel());
-                    new Menu().setVisible(true);
+                    new Main().setVisible(true);
                 } catch (UnsupportedLookAndFeelException ex) {
-                    Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
+    }
+    
+    //Funciones de limpieza de formularios
+    private void LimpiarFormularioTipoPrecio(){
+        txtTipoDePrecioPV.setText("");
+        txtPagaPV.setText("");
+        lblTipoPrecioVenta.setText(""+0);
+        
+        modeloTablaTipoPrecio.setRowCount(0);
+        modeloTablaTipoPrecio.setColumnCount(0);
+        CargarColumnasTipoPrecio();
+        
+        lblEditandoPreciosVenta.setVisible(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -565,8 +697,9 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
-    private javax.swing.JLabel lblPrecioVenta;
+    private javax.swing.JLabel lblEditandoPreciosVenta;
     private javax.swing.JLabel lblPrecioVenta2;
+    private javax.swing.JLabel lblTipoPrecioVenta;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblTitulo2;
     private javax.swing.JTextField txtPagaPV;
