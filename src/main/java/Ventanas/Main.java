@@ -21,6 +21,7 @@ public class Main extends javax.swing.JFrame {
     DefaultTableModel modeloTablaTipoPrecio = new DefaultTableModel();
     DefaultTableModel modeloTablaTipoProducto = new DefaultTableModel();
     DefaultTableModel modeloTablaFormaPago = new DefaultTableModel();
+    DefaultTableModel modeloTablaEmpleado = new DefaultTableModel();
     
     //Cargar modelos de tablas
     private void CargarColumnasTipoPrecio(){
@@ -92,6 +93,32 @@ public class Main extends javax.swing.JFrame {
        columna.setPreferredWidth(0);
        
     }
+    
+    private void CargarColumnasEmpleado(){
+       modeloTablaEmpleado.addColumn("num");
+       modeloTablaEmpleado.addColumn("Codigo empleado");
+       modeloTablaEmpleado.addColumn("Nombres");
+       modeloTablaEmpleado.addColumn("Apellidos");
+       
+       FuncionesEmpleados funcionesEmpleados = new FuncionesEmpleados();
+       ArrayList<Empleado> lista = funcionesEmpleados.MostrarEmpleado();
+       
+       int contador =lista.size();
+       modeloTablaEmpleado.setNumRows(contador);
+       for (int i = 0; i < contador; i++) {
+            Empleado empleado = lista.get(i);
+            modeloTablaEmpleado.setValueAt(empleado.getId_empleado(), i, 0);
+            modeloTablaEmpleado.setValueAt(empleado.getCodigo_empleado(), i, 1);
+            modeloTablaEmpleado.setValueAt(empleado.getNombres(), i, 2);
+            modeloTablaEmpleado.setValueAt(empleado.getApellidos(), i, 3);
+       }
+       
+       TableColumn columna = TablaEmpleados.getColumnModel().getColumn(0);
+       columna.setMaxWidth(0);
+       columna.setMinWidth(0);
+       columna.setPreferredWidth(0);
+       
+    }
 
     /**
      * Inicio
@@ -104,6 +131,7 @@ public class Main extends javax.swing.JFrame {
         CargarColumnasTipoPrecio();
         CargarColumnasTipoProducto();
         CargarColumnasFormaDePago();
+        CargarColumnasEmpleado();
         
         //Componentes a ocultar
         lblEditandoPreciosVenta.setVisible(false);
@@ -112,6 +140,8 @@ public class Main extends javax.swing.JFrame {
         lblTipoProducto.setVisible(false);
         lblEditandoFormaDePago.setVisible(false);
         lblIdFormaDePago.setVisible(false);
+        lblEditandoEmpleado.setVisible(false);
+        lblIdEmpleado.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -177,8 +207,28 @@ public class Main extends javax.swing.JFrame {
         lblEditandoFormaDePago = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         PanelUsuarios = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
         PanelEmpleados = new javax.swing.JPanel();
+        lblTitulo3 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtCodigoEmpleado = new javax.swing.JTextField();
+        Porcentaje2 = new javax.swing.JLabel();
+        txtNombres = new javax.swing.JTextField();
+        btnLimpiarFormEmpleado = new javax.swing.JButton();
+        btnGuardarEmpleado = new javax.swing.JButton();
+        jSeparator9 = new javax.swing.JSeparator();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        TablaEmpleados = new javax.swing.JTable();
+        btnBuscarEmpleado = new javax.swing.JButton();
+        lblIdEmpleado = new javax.swing.JLabel();
+        lblEditandoEmpleado = new javax.swing.JLabel();
+        Porcentaje3 = new javax.swing.JLabel();
+        txtApellidos = new javax.swing.JTextField();
+        Porcentaje4 = new javax.swing.JLabel();
+        txtBuscarEmpleado = new javax.swing.JTextField();
+        btnEliminarEmpleado1 = new javax.swing.JButton();
+        jPanel9 = new javax.swing.JPanel();
+        PanelEmpleadoss = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         PanelProductos = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -460,6 +510,88 @@ public class Main extends javax.swing.JFrame {
         PanelUsuarios.setBackground(new java.awt.Color(254, 254, 254));
         PanelUsuarios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        PanelEmpleados.setBackground(new java.awt.Color(254, 254, 254));
+        PanelEmpleados.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblTitulo3.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
+        lblTitulo3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo3.setText("Edicion de empleados");
+        PanelEmpleados.add(lblTitulo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1130, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon("/images/user.png")); // NOI18N
+        PanelEmpleados.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, -1));
+
+        jLabel9.setText("Codigo empleado");
+        PanelEmpleados.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 160, 40));
+        PanelEmpleados.add(txtCodigoEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 130, 40));
+
+        Porcentaje2.setText("Nombres");
+        PanelEmpleados.add(Porcentaje2, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 180, 80, 40));
+        PanelEmpleados.add(txtNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 330, 40));
+
+        btnLimpiarFormEmpleado.setIcon(new javax.swing.ImageIcon("/images/limpiar.png")); // NOI18N
+        btnLimpiarFormEmpleado.setText("Limpiar todo");
+        btnLimpiarFormEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLimpiarFormEmpleadoMouseClicked(evt);
+            }
+        });
+        PanelEmpleados.add(btnLimpiarFormEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 370, 230, 50));
+
+        btnGuardarEmpleado.setIcon(new javax.swing.ImageIcon("/images/save.png")); // NOI18N
+        btnGuardarEmpleado.setText("Guardar");
+        btnGuardarEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGuardarEmpleadoMouseClicked(evt);
+            }
+        });
+        PanelEmpleados.add(btnGuardarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, -1, 50));
+        PanelEmpleados.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 460, 10));
+
+        TablaEmpleados.setModel(modeloTablaEmpleado);
+        TablaEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaEmpleadosMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(TablaEmpleados);
+
+        PanelEmpleados.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 170, 490, 390));
+
+        btnBuscarEmpleado.setIcon(new javax.swing.ImageIcon("/images/lupa.png")); // NOI18N
+        btnBuscarEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBuscarEmpleadoMouseClicked(evt);
+            }
+        });
+        PanelEmpleados.add(btnBuscarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1056, 100, 50, 60));
+
+        lblIdEmpleado.setText("0");
+        PanelEmpleados.add(lblIdEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, -1, -1));
+
+        lblEditandoEmpleado.setForeground(new java.awt.Color(251, 0, 0));
+        lblEditandoEmpleado.setText("jLabel4");
+        PanelEmpleados.add(lblEditandoEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, -1, -1));
+
+        Porcentaje3.setText("Apellidos");
+        PanelEmpleados.add(Porcentaje3, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 250, 80, 40));
+        PanelEmpleados.add(txtApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 330, 40));
+
+        Porcentaje4.setText("Buscar");
+        PanelEmpleados.add(Porcentaje4, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 110, 80, 40));
+        PanelEmpleados.add(txtBuscarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 110, 330, 40));
+
+        btnEliminarEmpleado1.setIcon(new javax.swing.ImageIcon("/images/eliminar.png")); // NOI18N
+        btnEliminarEmpleado1.setText("Eliminar");
+        btnEliminarEmpleado1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEliminarEmpleado1MouseClicked(evt);
+            }
+        });
+        PanelEmpleados.add(btnEliminarEmpleado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, -1, 50));
+
+        PanelUsuarios.add(PanelEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -471,23 +603,23 @@ public class Main extends javax.swing.JFrame {
             .addComponent(PanelUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("Usuarios", jPanel8);
+        jTabbedPane2.addTab("Empleados", jPanel8);
 
-        PanelEmpleados.setBackground(new java.awt.Color(254, 254, 254));
-        PanelEmpleados.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        PanelEmpleadoss.setBackground(new java.awt.Color(254, 254, 254));
+        PanelEmpleadoss.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelEmpleados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PanelEmpleadoss, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelEmpleados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PanelEmpleadoss, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("Empleados", jPanel9);
+        jTabbedPane2.addTab("Usuarios", jPanel9);
 
         PanelProductos.setBackground(new java.awt.Color(254, 254, 254));
         PanelProductos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -820,6 +952,101 @@ public class Main extends javax.swing.JFrame {
         LimpiarFormularioFormaDePago();
     }//GEN-LAST:event_BtnLimpiarPanelFormaDePagoMouseClicked
 
+    private void btnLimpiarFormEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarFormEmpleadoMouseClicked
+        LimpiarFormularioEmpleado();
+    }//GEN-LAST:event_btnLimpiarFormEmpleadoMouseClicked
+
+    private void btnGuardarEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarEmpleadoMouseClicked
+        String codigoEmpleado = txtCodigoEmpleado.getText().trim();
+        String nombres = txtNombres.getText().trim();
+        String apellidos = txtApellidos.getText().trim();
+        
+        Empleado empleado = new Empleado(Integer.parseInt(lblIdEmpleado.getText()), codigoEmpleado,nombres,apellidos);
+        FuncionesEmpleados funcionesEmpleados = new FuncionesEmpleados();
+        
+        if (Integer.parseInt(lblIdEmpleado.getText()) == 0) {
+            if (funcionesEmpleados.GuardarEmpleado(empleado)) {
+                JOptionPane.showMessageDialog(null,"Se ha registrado correctamente al empleado "+nombres+" "+apellidos+" con el codigo"+codigoEmpleado);
+                LimpiarFormularioEmpleado();
+            }else{
+                 JOptionPane.showMessageDialog(null, "No se ha podido guardar la informacion, verifique la informacion","Error!", JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            if (funcionesEmpleados.ActualizarEmpleado(empleado)) {
+                JOptionPane.showMessageDialog(null,"Se ha actualizado la informacion");
+                LimpiarFormularioEmpleado();
+            }else{
+                JOptionPane.showMessageDialog(null, "No se ha podido guardar la informacion, verifique la informacion","Error!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnGuardarEmpleadoMouseClicked
+
+    private void TablaEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaEmpleadosMouseClicked
+        int index = TablaEmpleados.getSelectedRow();
+        TableModel model = TablaEmpleados.getModel();
+        
+        int id = Integer.parseInt(model.getValueAt(index,0).toString());
+        String codigo = model.getValueAt(index,1).toString();
+        String nombres = model.getValueAt(index,2).toString();
+        String apellidos = model.getValueAt(index,3).toString();
+        
+        lblIdEmpleado.setText(""+id);
+        txtCodigoEmpleado.setText(codigo);
+        txtNombres.setText(nombres);
+        txtApellidos.setText(apellidos);
+        
+        lblEditandoEmpleado.setVisible(true);
+        lblEditandoEmpleado.setText("Editando informacion de "+nombres+" "+apellidos);
+    }//GEN-LAST:event_TablaEmpleadosMouseClicked
+
+    private void btnBuscarEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarEmpleadoMouseClicked
+        if (txtBuscarEmpleado.getText().trim() != "") {
+            modeloTablaEmpleado.setRowCount(0);
+            modeloTablaEmpleado.setColumnCount(0);
+            modeloTablaEmpleado.addColumn("num");
+            modeloTablaEmpleado.addColumn("Codigo empleado");
+            modeloTablaEmpleado.addColumn("Nombres");
+            modeloTablaEmpleado.addColumn("Apellidos");
+
+            FuncionesEmpleados funcionesEmpleados = new FuncionesEmpleados();
+            ArrayList<Empleado> lista = funcionesEmpleados.BuscarEmpleado(txtBuscarEmpleado.getText().trim());
+
+            int contador =lista.size();
+            modeloTablaEmpleado.setNumRows(contador);
+            for (int i = 0; i < contador; i++) {
+                 Empleado empleado = lista.get(i);
+                 modeloTablaEmpleado.setValueAt(empleado.getId_empleado(), i, 0);
+                 modeloTablaEmpleado.setValueAt(empleado.getCodigo_empleado(), i, 1);
+                 modeloTablaEmpleado.setValueAt(empleado.getNombres(), i, 2);
+                 modeloTablaEmpleado.setValueAt(empleado.getApellidos(), i, 3);
+            }
+
+            TableColumn columna = TablaEmpleados.getColumnModel().getColumn(0);
+            columna.setMaxWidth(0);
+            columna.setMinWidth(0);
+            columna.setPreferredWidth(0);
+        }
+        else{
+           JOptionPane.showMessageDialog(null,"Ingrese el nombre del empleado a buscar ");
+        }
+    }//GEN-LAST:event_btnBuscarEmpleadoMouseClicked
+
+    private void btnEliminarEmpleado1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarEmpleado1MouseClicked
+       FuncionesEmpleados funcionesEmpleados = new FuncionesEmpleados();
+        
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog (null, "¿Desea eliminar la forma de pago?","Advertencia",dialogButton);
+        
+        if(dialogResult == JOptionPane.YES_OPTION){
+            if (funcionesEmpleados.EliminarEmpleado(Integer.parseInt(lblIdEmpleado.getText()))) {
+                JOptionPane.showMessageDialog(null,"Se ha eliminado correctamente la forma de pago ");
+                LimpiarFormularioEmpleado();
+            }else{
+                JOptionPane.showMessageDialog(null, "No es posible eliminar la forma de pago","Error!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnEliminarEmpleado1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -898,6 +1125,19 @@ public class Main extends javax.swing.JFrame {
         
         lblEditandoFormaDePago.setVisible(false);
     }
+    
+    private void LimpiarFormularioEmpleado(){
+        txtCodigoEmpleado.setText("");
+        txtNombres.setText("");
+        txtApellidos.setText("");
+        lblIdEmpleado.setText(""+0);
+        
+        modeloTablaEmpleado.setRowCount(0);
+        modeloTablaEmpleado.setColumnCount(0);
+        CargarColumnasEmpleado();
+        
+        lblEditandoEmpleado.setVisible(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnEliminarFormaDePago;
@@ -911,6 +1151,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton BtnLimpiarPanelTipoProductos;
     private javax.swing.JPanel PanelCajero;
     private javax.swing.JPanel PanelEmpleados;
+    private javax.swing.JPanel PanelEmpleadoss;
     private javax.swing.JPanel PanelFormaDePago;
     private javax.swing.JPanel PanelInventario;
     private javax.swing.JPanel PanelInventario1;
@@ -920,9 +1161,17 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel PanelUsuarios;
     private javax.swing.JLabel Porcentaje;
     private javax.swing.JLabel Porcentaje1;
+    private javax.swing.JLabel Porcentaje2;
+    private javax.swing.JLabel Porcentaje3;
+    private javax.swing.JLabel Porcentaje4;
+    private javax.swing.JTable TablaEmpleados;
     private javax.swing.JTable TablaFormaDePago;
     private javax.swing.JTable TablaPreciosVenta;
     private javax.swing.JTable TablaTiposDeProductos;
+    private javax.swing.JButton btnBuscarEmpleado;
+    private javax.swing.JButton btnEliminarEmpleado1;
+    private javax.swing.JButton btnGuardarEmpleado;
+    private javax.swing.JButton btnLimpiarFormEmpleado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -930,6 +1179,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -952,6 +1203,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -959,21 +1211,29 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
+    private javax.swing.JLabel lblEditandoEmpleado;
     private javax.swing.JLabel lblEditandoFormaDePago;
     private javax.swing.JLabel lblEditandoPreciosVenta;
     private javax.swing.JLabel lblEditandoTipoDeProducto;
+    private javax.swing.JLabel lblIdEmpleado;
     private javax.swing.JLabel lblIdFormaDePago;
     private javax.swing.JLabel lblTipoPrecioVenta;
     private javax.swing.JLabel lblTipoProducto;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblTitulo1;
     private javax.swing.JLabel lblTitulo2;
+    private javax.swing.JLabel lblTitulo3;
+    private javax.swing.JTextField txtApellidos;
+    private javax.swing.JTextField txtBuscarEmpleado;
+    private javax.swing.JTextField txtCodigoEmpleado;
     private javax.swing.JTextField txtDescripcionTipoProd;
     private javax.swing.JTextField txtFormaDePago;
     private javax.swing.JTextField txtHorario;
+    private javax.swing.JTextField txtNombres;
     private javax.swing.JTextField txtPagaPV;
     private javax.swing.JTextField txtTipoDePrecioPV;
     // End of variables declaration//GEN-END:variables
