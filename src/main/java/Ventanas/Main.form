@@ -392,6 +392,183 @@
                           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
                             <Property name="useNullLayout" type="boolean" value="false"/>
                           </Layout>
+                          <SubComponents>
+                            <Component class="javax.swing.JLabel" name="lblTitulo1">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Ubuntu" size="24" style="1"/>
+                                </Property>
+                                <Property name="horizontalAlignment" type="int" value="0"/>
+                                <Property name="text" type="java.lang.String" value="Edicion tipos de productos"/>
+                              </Properties>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                  <AbsoluteConstraints x="0" y="30" width="1130" height="-1"/>
+                                </Constraint>
+                              </Constraints>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="jLabel4">
+                              <Properties>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="2" name="/images/caja.png"/>
+                                </Property>
+                              </Properties>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                  <AbsoluteConstraints x="290" y="10" width="-1" height="-1"/>
+                                </Constraint>
+                              </Constraints>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="lblEditandoTipoDeProducto">
+                              <Properties>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="0" green="0" red="fb" type="rgb"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="jLabel4"/>
+                              </Properties>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                  <AbsoluteConstraints x="490" y="80" width="-1" height="-1"/>
+                                </Constraint>
+                              </Constraints>
+                            </Component>
+                            <Component class="javax.swing.JTextField" name="txtDescripcionTipoProd">
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                  <AbsoluteConstraints x="490" y="110" width="180" height="40"/>
+                                </Constraint>
+                              </Constraints>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="jLabel7">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="descripcion"/>
+                              </Properties>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                  <AbsoluteConstraints x="358" y="108" width="120" height="40"/>
+                                </Constraint>
+                              </Constraints>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="lblTipoProducto">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="0"/>
+                              </Properties>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                  <AbsoluteConstraints x="680" y="130" width="-1" height="-1"/>
+                                </Constraint>
+                              </Constraints>
+                            </Component>
+                            <Component class="javax.swing.JTextField" name="txtHorario">
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                  <AbsoluteConstraints x="490" y="180" width="180" height="40"/>
+                                </Constraint>
+                              </Constraints>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="Porcentaje1">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Horario"/>
+                              </Properties>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                  <AbsoluteConstraints x="414" y="180" width="70" height="40"/>
+                                </Constraint>
+                              </Constraints>
+                            </Component>
+                            <Component class="javax.swing.JSeparator" name="jSeparator4">
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                  <AbsoluteConstraints x="360" y="230" width="350" height="10"/>
+                                </Constraint>
+                              </Constraints>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="BtnEliminarTipoProducto">
+                              <Properties>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="2" name="/images/eliminar.png"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Eliminar"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BtnEliminarTipoProductoMouseClicked"/>
+                              </Events>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                  <AbsoluteConstraints x="550" y="250" width="-1" height="50"/>
+                                </Constraint>
+                              </Constraints>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="BtnGuardarTipoProducto">
+                              <Properties>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="2" name="/images/save.png"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Guardar"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BtnGuardarTipoProductoMouseClicked"/>
+                              </Events>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                  <AbsoluteConstraints x="420" y="250" width="-1" height="50"/>
+                                </Constraint>
+                              </Constraints>
+                            </Component>
+                            <Component class="javax.swing.JSeparator" name="jSeparator5">
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                  <AbsoluteConstraints x="360" y="320" width="350" height="10"/>
+                                </Constraint>
+                              </Constraints>
+                            </Component>
+                            <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+                              <AuxValues>
+                                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                              </AuxValues>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                  <AbsoluteConstraints x="310" y="350" width="490" height="140"/>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                              <SubComponents>
+                                <Component class="javax.swing.JTable" name="TablaTiposDeProductos">
+                                  <Properties>
+                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                      <Connection code="modeloTablaTipoProducto" type="code"/>
+                                    </Property>
+                                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                                      <TableColumnModel selectionModel="0"/>
+                                    </Property>
+                                    <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                                    </Property>
+                                  </Properties>
+                                  <Events>
+                                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="TablaTiposDeProductosMouseClicked"/>
+                                  </Events>
+                                </Component>
+                              </SubComponents>
+                            </Container>
+                            <Component class="javax.swing.JButton" name="BtnLimpiarPanelTipoProductos">
+                              <Properties>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="2" name="/images/limpiar.png"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Limpiar todo"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BtnLimpiarPanelTipoProductosMouseClicked"/>
+                              </Events>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                  <AbsoluteConstraints x="420" y="510" width="230" height="50"/>
+                                </Constraint>
+                              </Constraints>
+                            </Component>
+                          </SubComponents>
                         </Container>
                       </SubComponents>
                     </Container>
@@ -464,67 +641,56 @@
                                 </Constraint>
                               </Constraints>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="txtTipoDePrecioPV2">
+                            <Component class="javax.swing.JTextField" name="txtFormaDePago">
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                                   <AbsoluteConstraints x="490" y="110" width="180" height="40"/>
                                 </Constraint>
                               </Constraints>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="Descripcion">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="Descripcion"/>
-                              </Properties>
-                              <Constraints>
-                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                  <AbsoluteConstraints x="370" y="180" width="-1" height="40"/>
-                                </Constraint>
-                              </Constraints>
-                            </Component>
-                            <Component class="javax.swing.JTextField" name="txtPagaPV2">
-                              <Constraints>
-                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                  <AbsoluteConstraints x="490" y="180" width="220" height="40"/>
-                                </Constraint>
-                              </Constraints>
-                            </Component>
-                            <Component class="javax.swing.JButton" name="BtnLimpiarPanelPRecioVenta2">
+                            <Component class="javax.swing.JButton" name="BtnLimpiarPanelFormaDePago">
                               <Properties>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                                   <Image iconType="2" name="/images/limpiar.png"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Limpiar todo"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BtnLimpiarPanelFormaDePagoMouseClicked"/>
+                              </Events>
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                                   <AbsoluteConstraints x="420" y="510" width="230" height="50"/>
                                 </Constraint>
                               </Constraints>
                             </Component>
-                            <Component class="javax.swing.JButton" name="BtnGuardarPrecioVenta2">
+                            <Component class="javax.swing.JButton" name="BtnGuardarFormaDePago">
                               <Properties>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                                   <Image iconType="2" name="/images/save.png"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Guardar"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BtnGuardarFormaDePagoMouseClicked"/>
+                              </Events>
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                  <AbsoluteConstraints x="420" y="250" width="-1" height="50"/>
+                                  <AbsoluteConstraints x="420" y="190" width="-1" height="50"/>
                                 </Constraint>
                               </Constraints>
                             </Component>
                             <Component class="javax.swing.JSeparator" name="jSeparator6">
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                  <AbsoluteConstraints x="360" y="320" width="350" height="10"/>
+                                  <AbsoluteConstraints x="360" y="260" width="350" height="10"/>
                                 </Constraint>
                               </Constraints>
                             </Component>
                             <Component class="javax.swing.JSeparator" name="jSeparator7">
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                  <AbsoluteConstraints x="360" y="230" width="350" height="10"/>
+                                  <AbsoluteConstraints x="360" y="170" width="350" height="10"/>
                                 </Constraint>
                               </Constraints>
                             </Component>
@@ -534,46 +700,66 @@
                               </AuxValues>
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                  <AbsoluteConstraints x="310" y="350" width="490" height="140"/>
+                                  <AbsoluteConstraints x="310" y="290" width="490" height="200"/>
                                 </Constraint>
                               </Constraints>
 
                               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                               <SubComponents>
-                                <Component class="javax.swing.JTable" name="TablaPreciosVenta2">
+                                <Component class="javax.swing.JTable" name="TablaFormaDePago">
                                   <Properties>
-                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                      <Table columnCount="4" rowCount="4">
-                                        <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                                        <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                                        <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                                        <Column editable="true" title="Title 4" type="java.lang.Object"/>
-                                      </Table>
+                                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                      <Connection code="modeloTablaFormaPago" type="code"/>
+                                    </Property>
+                                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                                      <TableColumnModel selectionModel="0"/>
+                                    </Property>
+                                    <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                                     </Property>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="TablaFormaDePagoMouseClicked"/>
+                                  </Events>
                                 </Component>
                               </SubComponents>
                             </Container>
-                            <Component class="javax.swing.JButton" name="BtnEliminarPrecioVentaj2">
+                            <Component class="javax.swing.JButton" name="BtnEliminarFormaDePago">
                               <Properties>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                                   <Image iconType="2" name="/images/eliminar.png"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Eliminar"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BtnEliminarFormaDePagoMouseClicked"/>
+                              </Events>
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                  <AbsoluteConstraints x="550" y="250" width="-1" height="50"/>
+                                  <AbsoluteConstraints x="550" y="190" width="-1" height="50"/>
                                 </Constraint>
                               </Constraints>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="lblPrecioVenta2">
+                            <Component class="javax.swing.JLabel" name="lblIdFormaDePago">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="0"/>
                               </Properties>
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                                   <AbsoluteConstraints x="680" y="130" width="-1" height="-1"/>
+                                </Constraint>
+                              </Constraints>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="lblEditandoFormaDePago">
+                              <Properties>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="0" green="0" red="fb" type="rgb"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="jLabel4"/>
+                              </Properties>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                  <AbsoluteConstraints x="490" y="80" width="-1" height="-1"/>
                                 </Constraint>
                               </Constraints>
                             </Component>
