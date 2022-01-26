@@ -4,6 +4,7 @@
  */
 package Datos;
 import Modelos.Empleado;
+import Modelos.Usuario;
 import static Configuraciones.Config.*;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,22 +14,24 @@ import java.util.ArrayList;
  *
  * @author eduardo
  */
-public class FuncionesEmpleados {
+public class FuncionesUsuario {
     
-    public FuncionesEmpleados(){
+    public FuncionesUsuario(){
         LoadDriver();
     }
     
-    public boolean GuardarEmpleado(Empleado empleado){
+    public boolean GuardarUsuario(Usuario user){
        try {
             conn = DriverManager.getConnection(ruta,usuario,pass);
-            String sql = "INSERT INTO empleado (codigo_empleado, nombres, apellidos) "
-                   +"VALUES(?,?,?)";
+            String sql = "INSERT INTO usuario (nombres, apellidos, email, password, tipo_usuario) "
+                   +"VALUES(?,?,?,?,?)";
             //System.out.print(sql);
             st = conn.prepareStatement(sql);
-            st.setString(1,empleado.getCodigo_empleado());
-            st.setString(2,empleado.getNombres());
-            st.setString(3,empleado.getApellidos());
+            st.setString(1,user.getNombres());
+            st.setString(2,user.getApellidos());
+            st.setString(3,user.getClave());
+            st.setString(4,user.getPassword());
+            st.setString(5,user.getTipo_usuario());
             st.executeUpdate();
             return true;
        } catch (Exception e) {
@@ -46,21 +49,22 @@ public class FuncionesEmpleados {
        }
     } 
     
-    public boolean ActualizarEmpleado(Empleado empleado){
+    public boolean ActualizarUsuario(Usuario user){
        try {
             conn = DriverManager.getConnection(ruta,usuario,pass);
-            String sql = "UPDATE empleado SET codigo_empleado=?, nombres=?, apellidos=? "
-                   +"WHERE id_empleado=?";
+            String sql = "UPDATE usuario SET nombres=?, apellidos=?, email=?, tipo_usuario=? "
+                   +"WHERE id_usuario=?";
             //System.out.print(sql);
             st = conn.prepareStatement(sql);
-            st.setString(1,empleado.getCodigo_empleado());
-            st.setString(2,empleado.getNombres());
-            st.setString(3,empleado.getApellidos());
-            st.setInt(4,empleado.getId_empleado());
+            st.setString(1,user.getNombres());
+            st.setString(2,user.getApellidos());
+            st.setString(3,user.getClave());
+            st.setString(4,user.getTipo_usuario());
+            st.setInt(5,user.getId_usuario());
             st.executeUpdate();
             return true;
        } catch (Exception e) {
-            System.err.println("Error");
+            System.err.println("Error:"+e);
             return false;
        }
         finally{
@@ -74,11 +78,11 @@ public class FuncionesEmpleados {
        }
     } 
     
-    public boolean EliminarEmpleado(int id){
+    public boolean EliminarUsuario(int id){
        try {
             conn = DriverManager.getConnection(ruta,usuario,pass);
-            String sql = "DELETE FROM empleado "
-                   +"WHERE id_empleado=?";
+            String sql = "DELETE FROM usuario "
+                   +"WHERE id_usuario=?";
             //System.out.print(sql);
             st = conn.prepareStatement(sql);
             st.setInt(1,id);
@@ -99,21 +103,22 @@ public class FuncionesEmpleados {
        }
     }    
     
-    public ArrayList<Empleado> MostrarEmpleado(){
-       ArrayList<Empleado> lista = new ArrayList<Empleado>();
+    public ArrayList<Usuario> MostrarUsuario(){
+       ArrayList<Usuario> lista = new ArrayList<Usuario>();
        
        try {
            conn = DriverManager.getConnection(ruta,usuario,pass);
-           st = conn.prepareStatement("SELECT id_empleado, codigo_empleado, nombres, apellidos FROM empleado order by id_empleado");
+           st = conn.prepareStatement("SELECT id_usuario, nombres, apellidos, email, password, tipo_usuario FROM usuario order by id_usuario DESC");
            rs = st.executeQuery();
            while (rs.next()) {               
-               int id_empleado=rs.getInt("id_empleado");
-               String codigo=rs.getString("codigo_empleado");
+               int id_usuario=rs.getInt("id_usuario");
                String nombres=rs.getString("nombres");
                String apellidos=rs.getString("apellidos");
+               String email=rs.getString("email");
+               String tipo_usuario=rs.getString("tipo_usuario");
                
-               Empleado empleado = new Empleado(id_empleado, codigo, nombres, apellidos);
-               lista.add(empleado);
+               Usuario user = new Usuario(id_usuario, nombres, apellidos, email, "", tipo_usuario);
+               lista.add(user);
            }
            conn.close();
        } catch (Exception e) {
@@ -131,35 +136,4 @@ public class FuncionesEmpleados {
        return lista;
    }
     
-    public ArrayList<Empleado> BuscarEmpleado(String buscar){
-       ArrayList<Empleado> lista = new ArrayList<Empleado>();
-       
-       try {
-           conn = DriverManager.getConnection(ruta,usuario,pass);
-           st = conn.prepareStatement("SELECT id_empleado, codigo_empleado, nombres, apellidos FROM empleado WHERE nombres like '%"+buscar+"%' or apellidos like '%"+buscar+"%' or codigo_empleado LIKE '%"+buscar+"%'");
-           rs = st.executeQuery();
-           while (rs.next()) {               
-               int id_empleado=rs.getInt("id_empleado");
-               String codigo=rs.getString("codigo_empleado");
-               String nombres=rs.getString("nombres");
-               String apellidos=rs.getString("apellidos");
-               
-               Empleado empleado = new Empleado(id_empleado, codigo, nombres, apellidos);
-               lista.add(empleado);
-           }
-           conn.close();
-       } catch (Exception e) {
-           System.out.println(e.toString());
-       }
-       finally{
-           try {
-               //Cierre de conexion
-               st.close();
-               conn.close();
-           } catch (SQLException ex) {
-               ex.printStackTrace();
-           }
-       }
-       return lista;
-   }
 }

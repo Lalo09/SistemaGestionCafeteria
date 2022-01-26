@@ -6,6 +6,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import Modelos.*;
 import Datos.*;
+import java.awt.BorderLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -228,7 +229,7 @@ public class Main extends javax.swing.JFrame {
         txtBuscarEmpleado = new javax.swing.JTextField();
         btnEliminarEmpleado1 = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
-        PanelEmpleadoss = new javax.swing.JPanel();
+        PanelDeUsuarios = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         PanelProductos = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -273,6 +274,12 @@ public class Main extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Cajero", jPanel2);
+
+        jTabbedPane2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane2MouseClicked(evt);
+            }
+        });
 
         PanelTipoPrecio.setBackground(new java.awt.Color(254, 254, 254));
         PanelTipoPrecio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -605,18 +612,28 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Empleados", jPanel8);
 
-        PanelEmpleadoss.setBackground(new java.awt.Color(254, 254, 254));
-        PanelEmpleadoss.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        PanelDeUsuarios.setBackground(new java.awt.Color(254, 254, 254));
+
+        javax.swing.GroupLayout PanelDeUsuariosLayout = new javax.swing.GroupLayout(PanelDeUsuarios);
+        PanelDeUsuarios.setLayout(PanelDeUsuariosLayout);
+        PanelDeUsuariosLayout.setHorizontalGroup(
+            PanelDeUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1130, Short.MAX_VALUE)
+        );
+        PanelDeUsuariosLayout.setVerticalGroup(
+            PanelDeUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 580, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelEmpleadoss, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PanelDeUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelEmpleadoss, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PanelDeUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("Usuarios", jPanel9);
@@ -1047,6 +1064,17 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEliminarEmpleado1MouseClicked
 
+    private void jTabbedPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane2MouseClicked
+        PanelUsuarios pUsuario = new PanelUsuarios();
+        pUsuario.setSize(1130, 560); 
+        pUsuario.setLocation(0, 0);
+        
+        PanelDeUsuarios.removeAll();
+        PanelDeUsuarios.add(pUsuario, BorderLayout.CENTER);
+        PanelDeUsuarios.revalidate();
+        PanelDeUsuarios.repaint();
+    }//GEN-LAST:event_jTabbedPane2MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1150,8 +1178,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton BtnLimpiarPanelPRecioVenta;
     private javax.swing.JButton BtnLimpiarPanelTipoProductos;
     private javax.swing.JPanel PanelCajero;
+    private javax.swing.JPanel PanelDeUsuarios;
     private javax.swing.JPanel PanelEmpleados;
-    private javax.swing.JPanel PanelEmpleadoss;
     private javax.swing.JPanel PanelFormaDePago;
     private javax.swing.JPanel PanelInventario;
     private javax.swing.JPanel PanelInventario1;

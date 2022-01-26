@@ -13,15 +13,15 @@ public class Usuario {
     private int id_usuario;
     private String nombres;
     private String apellidos;
-    private String clave;
+    private String correo;
     private String password;
     private String tipo_usuario;
 
-    public Usuario(int id_usuario, String nombres, String apellidos, String clave, String password, String tipo_usuario) {
+    public Usuario(int id_usuario, String nombres, String apellidos, String correo, String password, String tipo_usuario) {
         this.id_usuario = id_usuario;
         this.nombres = nombres;
         this.apellidos = apellidos;
-        this.clave = clave;
+        this.correo = correo;
         this.password = password;
         this.tipo_usuario = tipo_usuario;
     }
@@ -51,11 +51,11 @@ public class Usuario {
     }
 
     public String getClave() {
-        return clave;
+        return correo;
     }
 
-    public void setClave(String clave) {
-        this.clave = clave;
+    public void setClave(String correo) {
+        this.correo = correo;
     }
 
     public String getPassword() {
@@ -76,7 +76,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "id_usuario=" + id_usuario + ", nombres=" + nombres + ", apellidos=" + apellidos + ", clave=" + clave + ", password=" + password + ", tipo_usuario=" + tipo_usuario + '}';
+        return "Usuario{" + "id_usuario=" + id_usuario + ", nombres=" + nombres + ", apellidos=" + apellidos + ", correo=" + correo + ", password=" + password + ", tipo_usuario=" + tipo_usuario + '}';
     }
     
 }
