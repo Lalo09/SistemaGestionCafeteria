@@ -13,11 +13,11 @@ public class Producto {
     private String descripcion;
     private String clave;
     private double precio;
-    private char control_inventario;
+    private int control_inventario;
     private int id_tipo_comida;
     private int cantidad;
 
-    public Producto(int id_producto, String descripcion, String clave, double precio, char control_inventario, int id_tipo_comida, int cantidad) {
+    public Producto(int id_producto, String descripcion, String clave, double precio, int control_inventario, int id_tipo_comida, int cantidad) {
         this.id_producto = id_producto;
         this.descripcion = descripcion;
         this.clave = clave;
@@ -59,7 +59,7 @@ public class Producto {
         this.precio = precio;
     }
 
-    public char getControl_inventario() {
+    public int getControl_inventario() {
         return control_inventario;
     }
 

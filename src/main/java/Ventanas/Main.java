@@ -232,8 +232,6 @@ public class Main extends javax.swing.JFrame {
         PanelDeUsuarios = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         PanelProductos = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
-        PanelInventario = new javax.swing.JPanel();
         PanelInventario1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
@@ -278,6 +276,9 @@ public class Main extends javax.swing.JFrame {
         jTabbedPane2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTabbedPane2MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTabbedPane2MousePressed(evt);
             }
         });
 
@@ -639,7 +640,17 @@ public class Main extends javax.swing.JFrame {
         jTabbedPane2.addTab("Usuarios", jPanel9);
 
         PanelProductos.setBackground(new java.awt.Color(254, 254, 254));
-        PanelProductos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        javax.swing.GroupLayout PanelProductosLayout = new javax.swing.GroupLayout(PanelProductos);
+        PanelProductos.setLayout(PanelProductosLayout);
+        PanelProductosLayout.setHorizontalGroup(
+            PanelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1130, Short.MAX_VALUE)
+        );
+        PanelProductosLayout.setVerticalGroup(
+            PanelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 580, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -653,22 +664,6 @@ public class Main extends javax.swing.JFrame {
         );
 
         jTabbedPane2.addTab("Productos", jPanel10);
-
-        PanelInventario.setBackground(new java.awt.Color(254, 254, 254));
-        PanelInventario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelInventario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelInventario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        jTabbedPane2.addTab("Inventarios", jPanel11);
 
         PanelInventario1.setBackground(new java.awt.Color(254, 254, 254));
         PanelInventario1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1075,6 +1070,17 @@ public class Main extends javax.swing.JFrame {
         PanelDeUsuarios.repaint();
     }//GEN-LAST:event_jTabbedPane2MouseClicked
 
+    private void jTabbedPane2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane2MousePressed
+        PanelProductos pProductos = new PanelProductos();
+        pProductos.setSize(1130, 560); 
+        pProductos.setLocation(0, 0);
+        
+        PanelProductos.removeAll();
+        PanelProductos.add(pProductos, BorderLayout.CENTER);
+        PanelProductos.revalidate();
+        PanelProductos.repaint();
+    }//GEN-LAST:event_jTabbedPane2MousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -1181,7 +1187,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel PanelDeUsuarios;
     private javax.swing.JPanel PanelEmpleados;
     private javax.swing.JPanel PanelFormaDePago;
-    private javax.swing.JPanel PanelInventario;
     private javax.swing.JPanel PanelInventario1;
     private javax.swing.JPanel PanelProductos;
     private javax.swing.JPanel PanelTipoPrecio;
@@ -1211,7 +1216,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
