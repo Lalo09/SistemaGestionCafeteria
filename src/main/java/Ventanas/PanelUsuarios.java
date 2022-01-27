@@ -156,6 +156,11 @@ public class PanelUsuarios extends javax.swing.JPanel {
                 btnEliminarUsuarioMouseClicked(evt);
             }
         });
+        btnEliminarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarUsuarioActionPerformed(evt);
+            }
+        });
         PanelEmpleados.add(btnEliminarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 480, -1, 50));
 
         jLabel10.setText("Correo electronico");
@@ -242,6 +247,10 @@ public class PanelUsuarios extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btnEliminarUsuarioMouseClicked
+
+    private void btnEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarUsuarioActionPerformed
 
     private void LimpiarFormularioUsuarios(){
         txtNombresUsuario.setText("");

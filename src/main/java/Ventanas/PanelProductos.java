@@ -6,8 +6,11 @@ package Ventanas;
 
 import javax.swing.table.DefaultTableModel;
 import Modelos.Producto;
+import Modelos.TipoProducto;
 import Datos.FuncionesProductos;
+import Datos.FuncionesTipoProducto;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
@@ -19,6 +22,7 @@ import javax.swing.table.TableModel;
 public class PanelProductos extends javax.swing.JPanel {
 
     DefaultTableModel modeloTablaProductos = new DefaultTableModel();
+    DefaultComboBoxModel <TipoProducto> modeloComboTipoProducto;
     
     private void CargarColumnasProducto(){
        modeloTablaProductos.addColumn("num");
@@ -61,13 +65,26 @@ public class PanelProductos extends javax.swing.JPanel {
        columnaTipo.setPreferredWidth(0);  
     }
     
+    private void CargarTipoCategorias(){
+        FuncionesTipoProducto funcionesTipoProducto = new FuncionesTipoProducto();
+        ArrayList<TipoProducto> lista;
+        lista = funcionesTipoProducto.MostrarTipoProducto();
+        
+        for (TipoProducto tipoProd:lista) {
+            modeloComboTipoProducto.addElement(tipoProd);
+        }
+    }
+    
     /**
      * Creates new form PanelUsuarios
      */
     public PanelProductos() {
+        modeloComboTipoProducto = new DefaultComboBoxModel<TipoProducto>();
         initComponents();
         CargarColumnasProducto();
-        
+        CargarTipoCategorias();
+        lblEditandoProducto.setVisible(false);
+        lblIdProducto.setVisible(false);
     }
 
     /**
@@ -132,6 +149,11 @@ public class PanelProductos extends javax.swing.JPanel {
                 btnLimpiarFormProductosMouseClicked(evt);
             }
         });
+        btnLimpiarFormProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarFormProductosActionPerformed(evt);
+            }
+        });
         PanelEmpleados.add(btnLimpiarFormProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 420, 230, 50));
 
         btnGuardarProducto.setIcon(new javax.swing.ImageIcon("/images/save.png")); // NOI18N
@@ -159,7 +181,7 @@ public class PanelProductos extends javax.swing.JPanel {
 
         lblEditandoProducto.setForeground(new java.awt.Color(251, 0, 0));
         lblEditandoProducto.setText("jLabel4");
-        PanelEmpleados.add(lblEditandoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(169, 80, 60, -1));
+        PanelEmpleados.add(lblEditandoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(109, 80, 420, -1));
 
         Porcentaje3.setText("Clave");
         PanelEmpleados.add(Porcentaje3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 60, 40));
@@ -173,7 +195,7 @@ public class PanelProductos extends javax.swing.JPanel {
         });
         PanelEmpleados.add(btnEliminarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, -1, 50));
 
-        cmbTipoProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cajero", "Administrador" }));
+        cmbTipoProducto.setModel(modeloComboTipoProducto );
         PanelEmpleados.add(cmbTipoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 430, 40));
 
         Porcentaje4.setText("Precio");
@@ -204,27 +226,168 @@ public class PanelProductos extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLimpiarFormProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarFormProductosMouseClicked
-        
+        LimpiarFormularioProducto();
     }//GEN-LAST:event_btnLimpiarFormProductosMouseClicked
 
     private void btnGuardarProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarProductoMouseClicked
+        String descripcion = txtDescripcionProducto.getText().trim();
+        String clave = txtClaveProducto.getText().trim();
+        Double precio = Double.parseDouble(txtPrecioProducto.getText().trim());
+        int control_inventario;
+        if (ckControlInventario.isSelected()) {
+            control_inventario = 1;
+        }else{
+            control_inventario=0;
+        }
+        int cantidad =  Integer.parseInt(txtCantidad.getText().trim());
         
+        TipoProducto tipoProducto = (TipoProducto)cmbTipoProducto.getSelectedItem();
+        int idTipoProducto = tipoProducto.getId();
+        
+        
+        Producto producto = new Producto(Integer.parseInt(lblIdProducto.getText().trim()), descripcion, clave, precio, control_inventario, idTipoProducto, cantidad);
+        
+        FuncionesProductos funcionesProductos = new FuncionesProductos();
+        
+        if (Integer.parseInt(lblIdProducto.getText()) == 0) {
+            if (funcionesProductos.GuardarProducto(producto)) {
+                JOptionPane.showMessageDialog(null,"Se ha registrado correctamente el producto "+ descripcion +" con la clave "+clave);
+                LimpiarFormularioProducto();
+            }else{
+                 JOptionPane.showMessageDialog(null, "No se ha podido guardar la informacion, verifique la informacion","Error!", JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            if (funcionesProductos.ActualizarProducto(producto)) {
+                JOptionPane.showMessageDialog(null,"Se ha actualizado correctamente la informacion del producto "+ descripcion);
+                LimpiarFormularioProducto();
+            }else{
+                JOptionPane.showMessageDialog(null, "No se ha podido guardar la informacion, verifique la informacion","Error!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_btnGuardarProductoMouseClicked
 
     private void TablaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaProductosMouseClicked
+        int index = TablaProductos.getSelectedRow();
+        TableModel model = TablaProductos.getModel();
         
+        int id = Integer.parseInt(model.getValueAt(index,0).toString());
+        String descripcion = model.getValueAt(index,1).toString();
+        String clave = model.getValueAt(index,2).toString();
+        double precio = Double.parseDouble(model.getValueAt(index,3).toString());
+        int control_inventario;
+        if (Integer.parseInt(model.getValueAt(index,4).toString())==1) {
+            ckControlInventario.setSelected(true);
+        }
+        else{
+            ckControlInventario.setSelected(false);
+        }
+        int tipo_producto=Integer.parseInt(model.getValueAt(index,5).toString());  
+        
+        FuncionesTipoProducto funcionesTipoProducto = new FuncionesTipoProducto();
+        
+        //cmbTipoProducto.addItem(funcionesTipoProducto.ObtenerObjetoProducto(Integer.parseInt(model.getValueAt(index,5).toString())));
+        //cmbTipoProducto.setSelectedIten((TipoProducto)funcionesTipoProducto.ObtenerObjetoProducto(Integer.parseInt(model.getValueAt(index,5).toString())));
+        /*
+        ArrayList<TipoProducto> lista;
+        lista = funcionesTipoProducto.ObtenerObjetoProducto(Integer.parseInt(model.getValueAt(index,5).toString()));
+        
+        for (TipoProducto tipoProd:lista) {
+            
+        }  */     
+        
+        int cantidad = Integer.parseInt(model.getValueAt(index,6).toString());
+        
+        lblIdProducto.setText(""+id);
+        txtDescripcionProducto.setText(descripcion);
+        txtClaveProducto.setText(clave);
+        txtPrecioProducto.setText(""+precio);
+        txtCantidad.setText(""+cantidad);
+        //cmbTipoProducto.setSelectedItem("Comida");
+        
+        lblEditandoProducto.setVisible(true);
+        lblEditandoProducto.setText("Editando informacion de "+descripcion);
     }//GEN-LAST:event_TablaProductosMouseClicked
 
     private void btnEliminarProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarProductoMouseClicked
+        FuncionesProductos funcionesProductos = new FuncionesProductos();
         
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog (null, "¿Desea eliminar el producto "+txtDescripcionProducto.getText().trim());
+        
+        if(dialogResult == JOptionPane.YES_OPTION){
+            if (funcionesProductos.EliminarProducto(Integer.parseInt(lblIdProducto.getText()))) {
+                JOptionPane.showMessageDialog(null,"Se ha eliminado correctamente el usuario ");
+                LimpiarFormularioProducto();
+            }else{
+                JOptionPane.showMessageDialog(null, "No es posible eliminar el tipo de precio","Error!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_btnEliminarProductoMouseClicked
 
     private void btnBuscarProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarProductoMouseClicked
-        
+        if (txtBuscarProducto.getText()!="") {
+            modeloTablaProductos.setRowCount(0);
+            modeloTablaProductos.setColumnCount(0);
+            
+            modeloTablaProductos.addColumn("num");
+            modeloTablaProductos.addColumn("Descripcion");
+            modeloTablaProductos.addColumn("Clave");
+            modeloTablaProductos.addColumn("Precio");
+            modeloTablaProductos.addColumn("Control de inventario");
+            modeloTablaProductos.addColumn("Tipo de comida");
+            modeloTablaProductos.addColumn("Cantidad");
+
+            FuncionesProductos funcionesProductos = new FuncionesProductos();
+            ArrayList<Producto> lista = funcionesProductos.BuscarProducto(txtBuscarProducto.getText().trim());
+
+            int contador =lista.size();
+            modeloTablaProductos.setNumRows(contador);
+            for (int i = 0; i < contador; i++) {
+                 Producto producto = lista.get(i);
+                 modeloTablaProductos.setValueAt(producto.getId_producto(), i, 0);
+                 modeloTablaProductos.setValueAt(producto.getDescripcion(), i, 1);
+                 modeloTablaProductos.setValueAt(producto.getClave(), i, 2);
+                 modeloTablaProductos.setValueAt(producto.getPrecio(), i, 3);
+                 modeloTablaProductos.setValueAt(producto.getControl_inventario(), i, 4);
+                 modeloTablaProductos.setValueAt(producto.getId_tipo_comida(), i, 5);
+                 modeloTablaProductos.setValueAt(producto.getCantidad(), i, 6);
+            }
+
+            TableColumn columnaId = TablaProductos.getColumnModel().getColumn(0);
+            columnaId.setMaxWidth(0);
+            columnaId.setMinWidth(0);
+            columnaId.setPreferredWidth(0);  
+
+            TableColumn columnaControl = TablaProductos.getColumnModel().getColumn(4);
+            columnaControl.setMaxWidth(0);
+            columnaControl.setMinWidth(0);
+            columnaControl.setPreferredWidth(0);  
+
+            TableColumn columnaTipo = TablaProductos.getColumnModel().getColumn(5);
+            columnaTipo.setMaxWidth(0);
+            columnaTipo.setMinWidth(0);
+            columnaTipo.setPreferredWidth(0);  
+        }
     }//GEN-LAST:event_btnBuscarProductoMouseClicked
 
+    private void btnLimpiarFormProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarFormProductosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLimpiarFormProductosActionPerformed
+
     private void LimpiarFormularioProducto(){
+        txtDescripcionProducto.setText("");
+        txtClaveProducto.setText("");
+        txtPrecioProducto.setText("");
+        txtCantidad.setText("");
+        ckControlInventario.setSelected(false);
+        cmbTipoProducto.setSelectedIndex(0);
         
+        modeloTablaProductos.setRowCount(0);
+        modeloTablaProductos.setColumnCount(0);
+        CargarColumnasProducto(); 
+        
+        lblIdProducto.setText(""+0);
+        lblEditandoProducto.setVisible(false);
     }
 
     /*
@@ -254,7 +417,7 @@ public class PanelProductos extends javax.swing.JPanel {
     private javax.swing.JButton btnGuardarProducto;
     private javax.swing.JButton btnLimpiarFormProductos;
     private javax.swing.JCheckBox ckControlInventario;
-    private javax.swing.JComboBox<String> cmbTipoProducto;
+    private javax.swing.JComboBox<TipoProducto> cmbTipoProducto;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane4;

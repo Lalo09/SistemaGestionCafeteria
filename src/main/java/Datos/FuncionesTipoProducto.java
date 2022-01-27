@@ -128,4 +128,36 @@ public class FuncionesTipoProducto {
        }
        return lista;
    }
+    
+    public TipoProducto ObtenerObjetoProducto(int id){
+       TipoProducto tipoProducto= new TipoProducto(0,"","");
+       
+       try {
+           conn = DriverManager.getConnection(ruta,usuario,pass);
+           st = conn.prepareStatement("SELECT id_tipo_comida, descripcion, horario FROM tipo_producto where id_tipo_comida ="+id);
+           rs = st.executeQuery();
+           while (rs.next()) {               
+               int id_tipo_comida=rs.getInt("id_tipo_comida");
+               String descripcion=rs.getString("descripcion");
+               String horario=rs.getString("horario");
+               
+               tipoProducto.setId(id_tipo_comida);
+               tipoProducto.setDescripcion(descripcion);
+               tipoProducto.setHorario(horario);
+           }
+           conn.close();
+       } catch (Exception e) {
+           System.out.println(e.toString());
+       }
+       finally{
+           try {
+               //Cierre de conexion
+               st.close();
+               conn.close();
+           } catch (SQLException ex) {
+               ex.printStackTrace();
+           }
+       }
+       return tipoProducto;
+   }
 }
