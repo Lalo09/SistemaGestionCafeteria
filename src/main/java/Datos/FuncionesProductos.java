@@ -146,7 +146,42 @@ public class FuncionesProductos {
        
        try {
            conn = DriverManager.getConnection(ruta,usuario,pass);
-           st = conn.prepareStatement("SELECT id_producto, descripcion, clave, precio, control_inventario, id_tipo_comida, cantidad FROM producto where descripcion LIKE '%"+busqueda+"%'");
+           st = conn.prepareStatement("SELECT id_producto, descripcion, clave, precio, control_inventario, id_tipo_comida, cantidad FROM producto where descripcion LIKE '%"+busqueda+"%' or clave LIKE '%"+busqueda+"%'");
+           rs = st.executeQuery();
+           while (rs.next()) {               
+               int id_producto=rs.getInt("id_producto");
+               String descripcion=rs.getString("descripcion");
+               String clave=rs.getString("clave");
+               double precio=rs.getDouble("precio");
+               int control_inventario=rs.getInt("control_inventario");
+               int id_tipo_comida=rs.getInt("id_tipo_comida");
+               int cantidad=rs.getInt("cantidad");
+               
+               Producto producto = new Producto(id_producto, descripcion, clave, precio, control_inventario, id_tipo_comida, cantidad);
+               lista.add(producto);
+           }
+           conn.close();
+       } catch (Exception e) {
+           System.out.println(e.toString());
+       }
+       finally{
+           try {
+               //Cierre de conexion
+               st.close();
+               conn.close();
+           } catch (SQLException ex) {
+               ex.printStackTrace();
+           }
+       }
+       return lista;
+   }
+    
+     public ArrayList<Producto> BuscarProductoPorCodigo(String busqueda){
+       ArrayList<Producto> lista = new ArrayList<Producto>();
+       
+       try {
+           conn = DriverManager.getConnection(ruta,usuario,pass);
+           st = conn.prepareStatement("SELECT id_producto, descripcion, clave, precio, control_inventario, id_tipo_comida, cantidad FROM producto where clave LIKE '%"+busqueda+"%' Limit 1");
            rs = st.executeQuery();
            while (rs.next()) {               
                int id_producto=rs.getInt("id_producto");

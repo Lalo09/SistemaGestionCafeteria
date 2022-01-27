@@ -281,19 +281,16 @@ public class PanelProductos extends javax.swing.JPanel {
         else{
             ckControlInventario.setSelected(false);
         }
-        int tipo_producto=Integer.parseInt(model.getValueAt(index,5).toString());  
+        int tipo_producto=Integer.parseInt(model.getValueAt(index,5).toString());
         
-        FuncionesTipoProducto funcionesTipoProducto = new FuncionesTipoProducto();
+        int numItems = cmbTipoProducto.getItemCount();
         
-        //cmbTipoProducto.addItem(funcionesTipoProducto.ObtenerObjetoProducto(Integer.parseInt(model.getValueAt(index,5).toString())));
-        //cmbTipoProducto.setSelectedIten((TipoProducto)funcionesTipoProducto.ObtenerObjetoProducto(Integer.parseInt(model.getValueAt(index,5).toString())));
-        /*
-        ArrayList<TipoProducto> lista;
-        lista = funcionesTipoProducto.ObtenerObjetoProducto(Integer.parseInt(model.getValueAt(index,5).toString()));
-        
-        for (TipoProducto tipoProd:lista) {
-            
-        }  */     
+        for (int i = 0; i < numItems; i++) {
+            TipoProducto producto = modeloComboTipoProducto.getElementAt(i);
+            if (producto.getId()==tipo_producto) {
+                cmbTipoProducto.setSelectedIndex(i);
+            }
+        }
         
         int cantidad = Integer.parseInt(model.getValueAt(index,6).toString());
         

@@ -154,6 +154,9 @@ public class Main extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         PanelCajero = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
@@ -245,14 +248,56 @@ public class Main extends javax.swing.JFrame {
         jPanel26 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(254, 254, 254));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, -1, -1));
 
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
+
         PanelCajero.setBackground(new java.awt.Color(254, 254, 254));
-        PanelCajero.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel10.setIcon(new javax.swing.ImageIcon("/images/empresa.png")); // NOI18N
+
+        jLabel11.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
+        jLabel11.setText("Bienvenido al sistema de cafeteria para realizar una venta da click en \"cajero\"");
+
+        jLabel12.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(25, 25, 25));
+        jLabel12.setText("Logo empresa");
+
+        javax.swing.GroupLayout PanelCajeroLayout = new javax.swing.GroupLayout(PanelCajero);
+        PanelCajero.setLayout(PanelCajeroLayout);
+        PanelCajeroLayout.setHorizontalGroup(
+            PanelCajeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelCajeroLayout.createSequentialGroup()
+                .addGap(507, 507, 507)
+                .addGroup(PanelCajeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel10))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCajeroLayout.createSequentialGroup()
+                .addContainerGap(130, Short.MAX_VALUE)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 959, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57))
+        );
+        PanelCajeroLayout.setVerticalGroup(
+            PanelCajeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelCajeroLayout.createSequentialGroup()
+                .addGap(112, 112, 112)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel12)
+                .addGap(35, 35, 35)
+                .addComponent(jLabel11)
+                .addContainerGap(287, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -260,14 +305,14 @@ public class Main extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(PanelCajero, javax.swing.GroupLayout.DEFAULT_SIZE, 1146, Short.MAX_VALUE)
+                .addComponent(PanelCajero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(PanelCajero, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
+                .addComponent(PanelCajero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1081,6 +1126,17 @@ public class Main extends javax.swing.JFrame {
         PanelProductos.repaint();
     }//GEN-LAST:event_jTabbedPane2MousePressed
 
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        PanelVentas pVentas = new PanelVentas();
+        pVentas.setSize(1194, 680); 
+        pVentas.setLocation(0, 0);
+        
+        PanelCajero.removeAll();
+        PanelCajero.add(pVentas, BorderLayout.CENTER);
+        PanelCajero.revalidate();
+        PanelCajero.repaint();
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1206,6 +1262,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardarEmpleado;
     private javax.swing.JButton btnLimpiarFormEmpleado;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
