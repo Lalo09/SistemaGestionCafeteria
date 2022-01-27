@@ -101,7 +101,7 @@ public class FuncionesFormaDePago {
        
        try {
            conn = DriverManager.getConnection(ruta,usuario,pass);
-           st = conn.prepareStatement("SELECT id_forma_pago, tipo FROM forma_pago order by id_forma_pago DESC ;");
+           st = conn.prepareStatement("SELECT id_forma_pago, tipo FROM forma_pago");
            rs = st.executeQuery();
            while (rs.next()) {               
                int id=rs.getInt("id_forma_pago");

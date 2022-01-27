@@ -162,4 +162,36 @@ public class FuncionesEmpleados {
        }
        return lista;
    }
+    
+    public ArrayList<Empleado> BuscarEmpleadoPorCodigo(String buscar){
+       ArrayList<Empleado> lista = new ArrayList<Empleado>();
+       
+       try {
+           conn = DriverManager.getConnection(ruta,usuario,pass);
+           st = conn.prepareStatement("SELECT id_empleado, codigo_empleado, nombres, apellidos FROM empleado WHERE codigo_empleado LIKE '%"+buscar+"%'");
+           rs = st.executeQuery();
+           while (rs.next()) {               
+               int id_empleado=rs.getInt("id_empleado");
+               String codigo=rs.getString("codigo_empleado");
+               String nombres=rs.getString("nombres");
+               String apellidos=rs.getString("apellidos");
+               
+               Empleado empleado = new Empleado(id_empleado, codigo, nombres, apellidos);
+               lista.add(empleado);
+           }
+           conn.close();
+       } catch (Exception e) {
+           System.out.println(e.toString());
+       }
+       finally{
+           try {
+               //Cierre de conexion
+               st.close();
+               conn.close();
+           } catch (SQLException ex) {
+               ex.printStackTrace();
+           }
+       }
+       return lista;
+   }
 }

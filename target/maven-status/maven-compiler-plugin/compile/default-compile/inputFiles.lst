@@ -6,7 +6,6 @@
 /mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/Cafeteria/src/main/java/Datos/FuncionesTipoProducto.java
 /mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/Cafeteria/src/main/java/Modelos/Producto.java
 /mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/Cafeteria/src/main/java/Modelos/DetalleVenta.java
-/mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/Cafeteria/src/main/java/Ventanas/PanelBusquedaProductos.java
 /mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/Cafeteria/src/main/java/Ventanas/Main.java
 /mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/Cafeteria/src/main/java/Modelos/TipoProducto.java
 /mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/Cafeteria/src/main/java/Datos/FuncionesProductos.java
@@ -18,5 +17,6 @@
 /mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/Cafeteria/src/main/java/Modelos/FormaDePago.java
 /mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/Cafeteria/src/main/java/Datos/FuncionesFormaDePago.java
 /mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/Cafeteria/src/main/java/Datos/FuncionesUsuario.java
+/mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/Cafeteria/src/main/java/Ventanas/FormBusquedaProductos.java
 /mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/Cafeteria/src/main/java/Modelos/Inventario.java
 /mnt/56e0741b-9f34-45d7-be54-f01bc909b45a/NetBeansProjects/Cafeteria/src/main/java/Ventanas/PanelUsuarios.java
