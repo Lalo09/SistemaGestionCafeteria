@@ -1177,8 +1177,7 @@ public class Main extends javax.swing.JFrame {
             funcionesVentas.EliminarVenta(idVenta);
             JOptionPane.showMessageDialog(this,"Se ha cancelado el ticket con el numero "+idVenta);
             txtTicketACancelar.setText("");
-        }
-        
+        }       
         
     }//GEN-LAST:event_BtnEliminarTicketMouseClicked
 

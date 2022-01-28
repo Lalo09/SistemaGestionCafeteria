@@ -143,7 +143,7 @@ public class PanelUsuarios extends javax.swing.JPanel {
 
         lblEditandoUsuario.setForeground(new java.awt.Color(251, 0, 0));
         lblEditandoUsuario.setText("jLabel4");
-        PanelEmpleados.add(lblEditandoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(169, 80, 60, -1));
+        PanelEmpleados.add(lblEditandoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(169, 80, 390, -1));
 
         Porcentaje3.setText("Apellidos");
         PanelEmpleados.add(Porcentaje3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 80, 40));
