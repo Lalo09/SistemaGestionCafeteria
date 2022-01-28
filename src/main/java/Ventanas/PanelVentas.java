@@ -444,6 +444,10 @@ public class PanelVentas extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAgregarProductoMouseClicked
 
     private void btnCobrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCobrarMouseClicked
+        
+        if (TablaProductos.getRowCount()==0) {
+            JOptionPane.showMessageDialog(null, "Ingrese al menos un producto para realizar la renta","Error!", JOptionPane.ERROR_MESSAGE);
+        }else{
         //Obtener fecha actual
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
@@ -507,6 +511,7 @@ public class PanelVentas extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this,"Venta guardada satisfactoriamente");
         
         //Codigo para imprimir ticket aqui abajo
+        }
     }//GEN-LAST:event_btnCobrarMouseClicked
 
     private void btnQuitarProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQuitarProductoMouseClicked
@@ -657,6 +662,7 @@ public class PanelVentas extends javax.swing.JPanel {
         jCheckBox2.setSelected(false);
         txtCodigoEmpleado.setEnabled(false);
         lblNombreEmpleado.setVisible(false);
+        idVenta=0;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelCajero;
