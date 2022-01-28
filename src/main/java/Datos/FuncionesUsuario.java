@@ -136,4 +136,56 @@ public class FuncionesUsuario {
        return lista;
    }
     
+    public int ObtenerUsuario(String email, String password){
+       int idUsuarioLogueado = 0;
+       
+       try {
+           conn = DriverManager.getConnection(ruta,usuario,pass);
+           st = conn.prepareStatement("SELECT id_usuario FROM usuario where email = '"+email+"' and password = '"+password+"' LIMIT 1");
+           rs = st.executeQuery();
+           while (rs.next()) {               
+               idUsuarioLogueado=rs.getInt("id_usuario");
+           }
+           conn.close();
+       } catch (Exception e) {
+           System.out.println(e.toString());
+       }
+       finally{
+           try {
+               //Cierre de conexion
+               st.close();
+               conn.close();
+           } catch (SQLException ex) {
+               ex.printStackTrace();
+           }
+       }
+       return idUsuarioLogueado;
+   } 
+    
+   public String ObtenerTipoUsuario(int id){
+       String tipoUsuario = "Cajero";
+       
+       try {
+           conn = DriverManager.getConnection(ruta,usuario,pass);
+           st = conn.prepareStatement("SELECT tipo_usuario FROM usuario where id_usuario = "+id+" LIMIT 1");
+           rs = st.executeQuery();
+           while (rs.next()) {               
+               tipoUsuario=rs.getString("tipo_usuario");
+           }
+           conn.close();
+       } catch (Exception e) {
+           System.out.println(e.toString());
+       }
+       finally{
+           try {
+               //Cierre de conexion
+               st.close();
+               conn.close();
+           } catch (SQLException ex) {
+               ex.printStackTrace();
+           }
+       }
+       return tipoUsuario;
+   } 
+    
 }

@@ -23,6 +23,8 @@ public class Main extends javax.swing.JFrame {
     DefaultTableModel modeloTablaTipoProducto = new DefaultTableModel();
     DefaultTableModel modeloTablaFormaPago = new DefaultTableModel();
     DefaultTableModel modeloTablaEmpleado = new DefaultTableModel();
+    int idUsuarioLogueado = 0;
+    String tipoUsuarioLogueado = "Administrador";
     
     //Cargar modelos de tablas
     private void CargarColumnasTipoPrecio(){
@@ -124,7 +126,7 @@ public class Main extends javax.swing.JFrame {
     /**
      * Inicio
      */
-    public Main() {
+    public Main(int id, String tipoUsuario) {
         initComponents();
         setLocationRelativeTo(null);
         
@@ -143,6 +145,17 @@ public class Main extends javax.swing.JFrame {
         lblIdFormaDePago.setVisible(false);
         lblEditandoEmpleado.setVisible(false);
         lblIdEmpleado.setVisible(false);
+        idUsuarioLogueado = id;
+        tipoUsuarioLogueado = tipoUsuario;
+        if (tipoUsuarioLogueado.equals("Cajero")) {
+            //jTabbedPane2.setVisible(false);
+            //TabReporteVentas.setVisible(false);
+            TabMain.remove(jPanel3);
+            //TabMain.remove(jPanel3);
+            //TabMain.remove(jPanel3);
+            TabReportes.remove(jPanel14);
+            TabReportes.remove(jPanel15);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -151,7 +164,7 @@ public class Main extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        TabMain = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         PanelCajero = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -242,7 +255,7 @@ public class Main extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         BtnEliminarTicket = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jTabbedPane3 = new javax.swing.JTabbedPane();
+        TabReportes = new javax.swing.JTabbedPane();
         jPanel12 = new javax.swing.JPanel();
         jPanel23 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
@@ -260,9 +273,9 @@ public class Main extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, -1, -1));
 
-        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+        TabMain.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTabbedPane1MouseClicked(evt);
+                TabMainMouseClicked(evt);
             }
         });
 
@@ -321,7 +334,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Cajero", jPanel2);
+        TabMain.addTab("Cajero", jPanel2);
 
         jTabbedPane2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -759,7 +772,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Mantenimientos", jPanel3);
+        TabMain.addTab("Mantenimientos", jPanel3);
 
         jPanel23.setBackground(new java.awt.Color(254, 254, 254));
         jPanel23.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -775,7 +788,7 @@ public class Main extends javax.swing.JFrame {
             .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane3.addTab("Cierre de caja", jPanel12);
+        TabReportes.addTab("Cierre de caja", jPanel12);
 
         jPanel24.setBackground(new java.awt.Color(254, 254, 254));
         jPanel24.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -791,7 +804,7 @@ public class Main extends javax.swing.JFrame {
             .addComponent(jPanel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane3.addTab("Productos", jPanel13);
+        TabReportes.addTab("Productos", jPanel13);
 
         jPanel25.setBackground(new java.awt.Color(254, 254, 254));
         jPanel25.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -807,7 +820,7 @@ public class Main extends javax.swing.JFrame {
             .addComponent(jPanel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane3.addTab("Consumo de empleados", jPanel14);
+        TabReportes.addTab("Consumo de empleados", jPanel14);
 
         jPanel26.setBackground(new java.awt.Color(254, 254, 254));
         jPanel26.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -823,7 +836,7 @@ public class Main extends javax.swing.JFrame {
             .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane3.addTab("Reporte de ventas", jPanel15);
+        TabReportes.addTab("Reporte de ventas", jPanel15);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -831,20 +844,20 @@ public class Main extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1146, Short.MAX_VALUE)
+                .addComponent(TabReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 1146, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
+                .addComponent(TabReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Reportes", jPanel4);
+        TabMain.addTab("Reportes", jPanel4);
 
-        jPanel1.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 680));
+        jPanel1.add(TabMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 680));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1154,8 +1167,8 @@ public class Main extends javax.swing.JFrame {
         PanelProductos.repaint();
     }//GEN-LAST:event_jTabbedPane2MousePressed
 
-    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
-        PanelVentas pVentas = new PanelVentas();
+    private void TabMainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabMainMouseClicked
+        PanelVentas pVentas = new PanelVentas(idUsuarioLogueado);
         pVentas.setSize(1194, 680); 
         pVentas.setLocation(0, 0);
         
@@ -1163,7 +1176,7 @@ public class Main extends javax.swing.JFrame {
         PanelCajero.add(pVentas, BorderLayout.CENTER);
         PanelCajero.revalidate();
         PanelCajero.repaint();
-    }//GEN-LAST:event_jTabbedPane1MouseClicked
+    }//GEN-LAST:event_TabMainMouseClicked
 
     private void BtnEliminarTicketMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnEliminarTicketMouseClicked
         int idVenta = Integer.parseInt(txtTicketACancelar.getText().trim());
@@ -1216,7 +1229,7 @@ public class Main extends javax.swing.JFrame {
             public void run() {
                 try {
                     UIManager.setLookAndFeel(new MintLookAndFeel());
-                    new Main().setVisible(true);
+//                    new Main().setVisible(true);
                 } catch (UnsupportedLookAndFeelException ex) {
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -1298,6 +1311,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel Porcentaje2;
     private javax.swing.JLabel Porcentaje3;
     private javax.swing.JLabel Porcentaje4;
+    private javax.swing.JTabbedPane TabMain;
+    private javax.swing.JTabbedPane TabReportes;
     private javax.swing.JTable TablaEmpleados;
     private javax.swing.JTable TablaFormaDePago;
     private javax.swing.JTable TablaPreciosVenta;
@@ -1350,9 +1365,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JLabel lblEditandoEmpleado;
     private javax.swing.JLabel lblEditandoFormaDePago;
     private javax.swing.JLabel lblEditandoPreciosVenta;

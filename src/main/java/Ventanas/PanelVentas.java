@@ -38,6 +38,7 @@ public class PanelVentas extends javax.swing.JPanel {
     DefaultTableModel modeloTablaDetalleVenta = new DefaultTableModel();
     double descuento = 0;
     int idVenta;
+    int idUsuarioLogueado = 0;
 
     private void CargarFormaDePago(){
         FuncionesFormaDePago funcionesFormaDePago = new FuncionesFormaDePago();
@@ -62,7 +63,7 @@ public class PanelVentas extends javax.swing.JPanel {
     /**
      * Creates new form PanelVentas
      */
-    public PanelVentas() {
+    public PanelVentas(int id) {
         modeloComboFormaDePago = new DefaultComboBoxModel<FormaDePago>();
         modeloComboTipoPrecio = new DefaultComboBoxModel<TipoDePrecio>();
         CargarFormaDePago();
@@ -87,6 +88,7 @@ public class PanelVentas extends javax.swing.JPanel {
        lblTotalFinal.setVisible(false);
        
        idVenta = 0;
+       idUsuarioLogueado = id;
               
     }
 
@@ -463,7 +465,7 @@ public class PanelVentas extends javax.swing.JPanel {
         FormaDePago formaPago = (FormaDePago) cmbFormasDePago.getSelectedItem();
         int idFormaPago = formaPago.getId_forma_de_pago();
         
-        int idUser = 4; //Cambiar en el login
+        int idUser = idUsuarioLogueado; //Cambiar en el login
         
         Venta venta;
         
