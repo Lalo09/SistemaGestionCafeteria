@@ -7,6 +7,7 @@ import Datos.FuncionesEmpleados;
 import Datos.FuncionesFormaDePago;
 import Datos.FuncionesProductos;
 import Datos.FuncionesTipoPrecio;
+import Datos.FuncionesVentas;
 import Modelos.FormaDePago;
 import Modelos.TipoDePrecio;
 import Modelos.Venta;
@@ -14,8 +15,13 @@ import Modelos.DetalleVenta;
 import Modelos.Empleado;
 import Modelos.Producto;
 import java.awt.event.KeyEvent;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.SimpleTimeZone;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -31,6 +37,7 @@ public class PanelVentas extends javax.swing.JPanel {
     DefaultComboBoxModel <TipoDePrecio> modeloComboTipoPrecio;
     DefaultTableModel modeloTablaDetalleVenta = new DefaultTableModel();
     double descuento = 0;
+    int idVenta;
 
     private void CargarFormaDePago(){
         FuncionesFormaDePago funcionesFormaDePago = new FuncionesFormaDePago();
@@ -76,6 +83,10 @@ public class PanelVentas extends javax.swing.JPanel {
        lblIdEmpleado.setVisible(false);
        lblNombreProducto.setVisible(false);
        lblNombreEmpleado.setVisible(false);
+       jLabel8.setVisible(false);
+       lblTotalFinal.setVisible(false);
+       
+       idVenta = 0;
               
     }
 
@@ -151,7 +162,7 @@ public class PanelVentas extends javax.swing.JPanel {
         jLabel2.setText("Tipo de precio");
         PanelCajero.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 140, 40));
 
-        lblPrecioProducto.setText("[Precio]");
+        lblPrecioProducto.setText("0");
         PanelCajero.add(lblPrecioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 70, 40));
 
         btnBuscarProducto.setIcon(new javax.swing.ImageIcon("/images/buscar.png")); // NOI18N
@@ -260,9 +271,11 @@ public class PanelVentas extends javax.swing.JPanel {
         jLabel10.setText("Forma de pago");
         PanelCajero.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, 170, 40));
 
-        jLabel11.setText("Suma");
-        PanelCajero.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 480, 50, 40));
+        jLabel11.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        jLabel11.setText("Total a pagar");
+        PanelCajero.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 480, 130, 40));
 
+        lblSumaProductos.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         lblSumaProductos.setText("0");
         PanelCajero.add(lblSumaProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 480, 240, 40));
 
@@ -282,6 +295,11 @@ public class PanelVentas extends javax.swing.JPanel {
         btnCobrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCobrarMouseClicked(evt);
+            }
+        });
+        btnCobrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCobrarActionPerformed(evt);
             }
         });
         PanelCajero.add(btnCobrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 480, 280, 60));
@@ -375,7 +393,9 @@ public class PanelVentas extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLimpiarFormularioMouseClicked
 
     private void btnReimprimirTicketMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReimprimirTicketMouseClicked
-        // TODO add your handling code here:
+        int idVenta =Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero de ticket: "));
+        JOptionPane.showMessageDialog(this,"Se ha generado de nuevo el ticket "+idVenta);
+        LimpiarTodo();
     }//GEN-LAST:event_btnReimprimirTicketMouseClicked
 
     private void btnAgregarProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarProductoMouseClicked
@@ -422,7 +442,69 @@ public class PanelVentas extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAgregarProductoMouseClicked
 
     private void btnCobrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCobrarMouseClicked
-        // TODO add your handling code here:
+        //Obtener fecha actual
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        String fecha = dateFormat.format(date);
+        
+        DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+        String hora = timeFormat.format(date);
+         
+        int idEmpleado=0;
+        if (jCheckBox2.isSelected()) {
+            idEmpleado = Integer.parseInt(lblIdEmpleado.getText().trim());    
+        }
+       
+        double totalFinal = Double.parseDouble(lblSumaProductos.getText().trim());
+        
+        TipoDePrecio tipoPrecio = (TipoDePrecio) cmbTiposDePrecio.getSelectedItem();
+        int idTipoPrecio = tipoPrecio.getId_tipo_de_precio();
+        
+        FormaDePago formaPago = (FormaDePago) cmbFormasDePago.getSelectedItem();
+        int idFormaPago = formaPago.getId_forma_de_pago();
+        
+        int idUser = 4; //Cambiar en el login
+        
+        Venta venta;
+        
+        if (jCheckBox2.isSelected()) {
+            venta = new Venta(idVenta, fecha, hora, idEmpleado, totalFinal, idTipoPrecio, idFormaPago, idUser);
+        }else{
+            venta = new Venta(idVenta, fecha, hora,totalFinal, idTipoPrecio, idFormaPago, idUser);
+        }
+        
+        FuncionesVentas funcionesVenta = new FuncionesVentas();
+        if (jCheckBox2.isSelected()) {
+            if (funcionesVenta.GuardarVenta(venta)) {
+                System.err.println("Entro aqui seleccionado");
+                idVenta = funcionesVenta.GetIdVenta();
+                //JOptionPane.showMessageDialog(this,idVenta );
+            }
+            
+        }else{
+            if (funcionesVenta.GuardarVentaExterna(venta)) {
+                idVenta = funcionesVenta.GetIdVenta();
+                //JOptionPane.showMessageDialog(this,idVenta );
+            }
+        }
+        
+        //Insert rent detail
+        DefaultTableModel model = (DefaultTableModel)TablaProductos.getModel();
+        for (int i = 0; i < model.getRowCount(); i++) {
+
+            int id_producto = Integer.parseInt(model.getValueAt(i,0).toString());
+            int cantidad = Integer.parseInt(model.getValueAt(i,2).toString());
+            double precio = Double.parseDouble(model.getValueAt(i,3).toString());
+
+            DetalleVenta detalleVenta = new DetalleVenta(0,idVenta,id_producto,cantidad,precio);
+            funcionesVenta.GuardarDetalleVenta(detalleVenta);
+        }
+        
+        LimpiarTodo();
+        
+        JOptionPane.showMessageDialog(this,"Venta guardada satisfactoriamente");
+        
+        //Codigo para imprimir ticket aqui abajo
     }//GEN-LAST:event_btnCobrarMouseClicked
 
     private void btnQuitarProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQuitarProductoMouseClicked
@@ -474,6 +556,7 @@ public class PanelVentas extends javax.swing.JPanel {
                 lblPrecioProducto.setText(""+producto.getPrecio());
                 txtCantidadProducto.setValue(1);
                 lblTotalProducto.setText(""+producto.getPrecio());
+                lblNombreProducto.setVisible(true);
             }
         }
         
@@ -515,6 +598,7 @@ public class PanelVentas extends javax.swing.JPanel {
                 lblIdEmpleado.setText(""+empleado.getId_empleado());
                 lblNombreEmpleado.setText(empleado.getNombres()+" "+empleado.getApellidos());
                 txtCodigoEmpleado.setText(empleado.getCodigo_empleado());
+                lblNombreEmpleado.setVisible(true);
             }
         }
         
@@ -552,6 +636,10 @@ public class PanelVentas extends javax.swing.JPanel {
        
     }//GEN-LAST:event_cmbTiposDePrecioMousePressed
 
+    private void btnCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCobrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCobrarActionPerformed
+
     private void LimpiarTodo(){
         lblNombreProducto.setVisible(false);
         lblIdProducto.setText(""+0);
@@ -563,6 +651,10 @@ public class PanelVentas extends javax.swing.JPanel {
         lblTotalFinal.setText(""+0);
         DefaultTableModel model = (DefaultTableModel)TablaProductos.getModel();
         model.setRowCount(0);
+        lblIdEmpleado.setVisible(false);
+        jCheckBox2.setSelected(false);
+        txtCodigoEmpleado.setEnabled(false);
+        lblNombreEmpleado.setVisible(false);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelCajero;

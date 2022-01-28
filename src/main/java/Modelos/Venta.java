@@ -19,6 +19,16 @@ public class Venta {
     private int id_forma_de_pago;
     private int id_usuario;
 
+    public Venta(int id_venta, String fecha, String hora, double total, int id_tipo_precio, int id_forma_de_pago, int id_usuario) {
+        this.id_venta = id_venta;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.total = total;
+        this.id_tipo_precio = id_tipo_precio;
+        this.id_forma_de_pago = id_forma_de_pago;
+        this.id_usuario = id_usuario;
+    }
+
     public Venta(int id_venta, String fecha, String hora, int id_empleado, double total, int id_tipo_precio, int id_forma_de_pago, int id_usuario) {
         this.id_venta = id_venta;
         this.fecha = fecha;

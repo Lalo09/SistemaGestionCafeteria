@@ -236,6 +236,11 @@ public class Main extends javax.swing.JFrame {
         jPanel10 = new javax.swing.JPanel();
         PanelProductos = new javax.swing.JPanel();
         PanelInventario1 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        txtTicketACancelar = new javax.swing.JTextField();
+        lblTitulo4 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        BtnEliminarTicket = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel12 = new javax.swing.JPanel();
@@ -712,6 +717,29 @@ public class Main extends javax.swing.JFrame {
 
         PanelInventario1.setBackground(new java.awt.Color(254, 254, 254));
         PanelInventario1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel13.setForeground(new java.awt.Color(230, 1, 1));
+        jLabel13.setText("Advertencia: Esta accion es irreversible");
+        PanelInventario1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, 440, 40));
+        PanelInventario1.add(txtTicketACancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 150, 180, 40));
+
+        lblTitulo4.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
+        lblTitulo4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo4.setText("Cancelacion de ticket");
+        PanelInventario1.add(lblTitulo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1130, -1));
+
+        jLabel14.setText("Numero de ticket");
+        PanelInventario1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, 150, 40));
+
+        BtnEliminarTicket.setIcon(new javax.swing.ImageIcon("/images/eliminar.png")); // NOI18N
+        BtnEliminarTicket.setText("Cancelar ticket");
+        BtnEliminarTicket.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnEliminarTicketMouseClicked(evt);
+            }
+        });
+        PanelInventario1.add(BtnEliminarTicket, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 210, 230, 50));
+
         jTabbedPane2.addTab("Cancelar ticket", PanelInventario1);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -1137,6 +1165,23 @@ public class Main extends javax.swing.JFrame {
         PanelCajero.repaint();
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
+    private void BtnEliminarTicketMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnEliminarTicketMouseClicked
+        int idVenta = Integer.parseInt(txtTicketACancelar.getText().trim());
+        
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog (null, "¿Desea cancelar el ticket con el numero "+idVenta);
+        
+        if(dialogResult == JOptionPane.YES_OPTION){
+            FuncionesVentas funcionesVentas = new FuncionesVentas();
+            funcionesVentas.EliminarDetalleVenta(idVenta);
+            funcionesVentas.EliminarVenta(idVenta);
+            JOptionPane.showMessageDialog(this,"Se ha cancelado el ticket con el numero "+idVenta);
+            txtTicketACancelar.setText("");
+        }
+        
+        
+    }//GEN-LAST:event_BtnEliminarTicketMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1232,6 +1277,7 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnEliminarFormaDePago;
     private javax.swing.JButton BtnEliminarPrecioVentaj;
+    private javax.swing.JButton BtnEliminarTicket;
     private javax.swing.JButton BtnEliminarTipoProducto;
     private javax.swing.JButton BtnGuardarFormaDePago;
     private javax.swing.JButton BtnGuardarPrecioVenta;
@@ -1265,6 +1311,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1318,6 +1366,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitulo1;
     private javax.swing.JLabel lblTitulo2;
     private javax.swing.JLabel lblTitulo3;
+    private javax.swing.JLabel lblTitulo4;
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JTextField txtBuscarEmpleado;
     private javax.swing.JTextField txtCodigoEmpleado;
@@ -1326,6 +1375,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField txtHorario;
     private javax.swing.JTextField txtNombres;
     private javax.swing.JTextField txtPagaPV;
+    private javax.swing.JTextField txtTicketACancelar;
     private javax.swing.JTextField txtTipoDePrecioPV;
     // End of variables declaration//GEN-END:variables
 }

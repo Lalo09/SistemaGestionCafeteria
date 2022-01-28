@@ -177,6 +177,7 @@ public class FormBusquedaProductos extends javax.swing.JFrame {
         PanelVentas.lblPrecioProducto.setText(""+precio);
         PanelVentas.txtCantidadProducto.setValue(1);
         PanelVentas.lblTotalProducto.setText(""+precio);
+        PanelVentas.lblNombreProducto.setVisible(true);
         
         this.dispose();
     }//GEN-LAST:event_TablaDeProductosMouseClicked
