@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Ventanas;
+import Configuraciones.Config;
 import Datos.FuncionesEmpleados;
 import Datos.FuncionesFormaDePago;
 import Datos.FuncionesProductos;
@@ -15,18 +16,27 @@ import Modelos.DetalleVenta;
 import Modelos.Empleado;
 import Modelos.Producto;
 import java.awt.event.KeyEvent;
+import java.sql.Connection;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.SimpleTimeZone;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -397,7 +407,32 @@ public class PanelVentas extends javax.swing.JPanel {
     private void btnReimprimirTicketMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReimprimirTicketMouseClicked
         int idVenta =Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero de ticket: "));
         JOptionPane.showMessageDialog(this,"Se ha generado de nuevo el ticket "+idVenta);
+        try {
+                
+                Config con = new Config();
+                Connection conn = con.getConexion();
+                
+                JasperReport report = null;
+                String path = "src/main/java/Reportes/ticket.jasper";
+                
+                Map param = new HashMap();
+                
+                param.put("idVenta", idVenta);
+
+                report = (JasperReport)JRLoader.loadObjectFromFile(path);
+                
+                JasperPrint jprint = JasperFillManager.fillReport(report,param,conn);
+                
+                JasperViewer view = new JasperViewer(jprint,false);
+                
+                view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                view.setVisible(true);
+                        
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,e);
+            }
         LimpiarTodo();
+        
     }//GEN-LAST:event_btnReimprimirTicketMouseClicked
 
     private void btnAgregarProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarProductoMouseClicked
@@ -505,12 +540,36 @@ public class PanelVentas extends javax.swing.JPanel {
             DetalleVenta detalleVenta = new DetalleVenta(0,idVenta,id_producto,cantidad,precio);
             funcionesVenta.GuardarDetalleVenta(detalleVenta);
         }
-        
+        int numTicket = idVenta;
         LimpiarTodo();
         
-        JOptionPane.showMessageDialog(this,"Venta guardada satisfactoriamente");
+        //JOptionPane.showMessageDialog(this,"Venta guardada satisfactoriamente");
         
         //Codigo para imprimir ticket aqui abajo
+        try {
+                
+                Config con = new Config();
+                Connection conn = con.getConexion();
+                
+                JasperReport report = null;
+                String path = "src/main/java/Reportes/ticket.jasper";
+                
+                Map param = new HashMap();
+                
+                param.put("idVenta", numTicket);
+
+                report = (JasperReport)JRLoader.loadObjectFromFile(path);
+                
+                JasperPrint jprint = JasperFillManager.fillReport(report,param,conn);
+                
+                JasperViewer view = new JasperViewer(jprint,false);
+                
+                view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                view.setVisible(true);
+                        
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,e);
+            }
         }
     }//GEN-LAST:event_btnCobrarMouseClicked
 
