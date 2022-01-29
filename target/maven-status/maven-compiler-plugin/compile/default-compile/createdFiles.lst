@@ -9,15 +9,20 @@ Ventanas/PanelVentas$13.class
 Ventanas/Main$20.class
 Ventanas/Main$1.class
 Ventanas/FormBusquedaProductos$4.class
+Ventanas/Login$2.class
 Ventanas/PanelVentas$3.class
 Ventanas/Main$13.class
 Ventanas/PanelVentas$12.class
 Datos/FuncionesFormaDePago.class
+Ventanas/Main$23.class
 Ventanas/PanelVentas.class
 Ventanas/PanelVentas$6.class
 Ventanas/FormBusquedaProductos.class
 Ventanas/PanelProductos$2.class
+Ventanas/PanelVentas$17.class
+Ventanas/Main$21.class
 Ventanas/Main$18.class
+Ventanas/PanelVentas$20.class
 Modelos/Producto.class
 Ventanas/Main$16.class
 Ventanas/PanelVentas$5.class
@@ -26,6 +31,7 @@ Ventanas/PanelUsuarios$2.class
 Ventanas/Main.class
 Modelos/Inventario.class
 Ventanas/PanelVentas$14.class
+Ventanas/Main$24.class
 Ventanas/PanelVentas$2.class
 Datos/FuncionesTipoProducto.class
 Ventanas/Main$4.class
@@ -42,6 +48,8 @@ Configuraciones/Config.class
 Modelos/FormaDePago.class
 Ventanas/PanelVentas$4.class
 Ventanas/Main$15.class
+Ventanas/Main$25.class
+Ventanas/PanelVentas$18.class
 Modelos/Empleado.class
 Datos/FuncionesEmpleados.class
 Ventanas/PanelVentas$8.class
@@ -53,6 +61,7 @@ Ventanas/PanelUsuarios$3.class
 Datos/FuncionesUsuario.class
 Ventanas/Main$6.class
 Ventanas/Main$3.class
+Ventanas/PanelVentas$15.class
 Ventanas/FormBusquedaProductos$2.class
 Ventanas/Main$2.class
 Ventanas/Main$11.class
@@ -67,7 +76,11 @@ Modelos/Venta.class
 Ventanas/Main$5.class
 Ventanas/Main$14.class
 Ventanas/PanelUsuarios$4.class
+Datos/FuncionesVentas.class
 Ventanas/PanelVentas$7.class
+Ventanas/PanelVentas$19.class
 Ventanas/Login.class
+Ventanas/Main$22.class
+Ventanas/PanelVentas$16.class
 Ventanas/PanelProductos$1.class
 Ventanas/Main$17.class

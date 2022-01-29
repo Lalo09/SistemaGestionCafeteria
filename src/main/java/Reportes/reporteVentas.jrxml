@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null"  pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ea694a69-9b77-4f73-b3f5-302aec94d14b">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fecha_inicio" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha_fin" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select v.fecha, v.hora, tp.tipo, fp.tipo, v.total, CONCAT(u2.nombres,' ',u2.apellidos) as atendio from venta v 
+inner join tipo_precio tp on tp.id_tipo_precio  = v.id_tipo_precio 
+inner join forma_pago fp on fp.id_forma_pago = v.id_forma_pago 
+inner join usuario u2 on u2.id_usuario = v.id_usuario 
+WHERE v.fecha between '$P!{fecha_inicio}' and '$P!{fecha_fin}' and tp.tipo != 'Cortesia']]>
+	</queryString>
+	<field name="fecha" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="hora" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="atendio" class="java.lang.String"/>
+	<variable name="total_1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="83" height="79" uuid="d6e51b29-8dcf-4350-afb9-d48f66c0d027"/>
+				<imageExpression><![CDATA["/images/empresa.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="145" y="22" width="320" height="57" uuid="d48f9b56-ed30-4b96-ad01-ff51f45be626"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Reporte de ventas]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="160" y="0" width="100" height="20" uuid="695aa547-b8bc-4a0f-a4e4-4a326db595df"/>
+				<text><![CDATA[Reporte generado:]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="260" y="0" width="148" height="20" uuid="6773235a-cbad-493e-9ff7-e68f176795ad"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="100" height="20" uuid="9c3c82d5-9c54-48f0-952d-0856f48aaf05"/>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="100" height="20" uuid="38f3dfdb-1136-4d69-bc65-bcab18a8dde9"/>
+				<text><![CDATA[Hora]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="100" height="20" uuid="4384352e-5cfb-456a-90e7-598ca3c6682b"/>
+				<text><![CDATA[Tipo comida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="100" height="20" uuid="4d6dc774-c8b1-4a0b-86c9-83091452e585"/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="0" width="100" height="20" uuid="1042a513-bba0-4933-8f63-562d3f22cfcd"/>
+				<text><![CDATA[Atendio]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="a113403d-f5f6-4faa-8726-8c0e660d8f6e"/>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="20" uuid="e3615d5c-51ab-4854-9bad-b38eb2499587"/>
+				<textFieldExpression><![CDATA[$F{hora}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="20" uuid="92c1799a-8d69-4dcc-9d62-66ddf1b011c5"/>
+				<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="20" uuid="c59ba39a-8eda-4530-8f8e-438be8097071"/>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="100" height="20" uuid="6ae60cb2-2085-4c51-a675-ee79ae61de51"/>
+				<textFieldExpression><![CDATA[$F{atendio}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<textField>
+				<reportElement x="337" y="25" width="100" height="20" uuid="60c140e5-65fd-4240-9767-adbef386f472"/>
+				<textFieldExpression><![CDATA[$V{total_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="237" y="25" width="100" height="20" uuid="dec910e4-9dac-48b6-aee4-04b8e2324397"/>
+				<text><![CDATA[Total en ventas]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

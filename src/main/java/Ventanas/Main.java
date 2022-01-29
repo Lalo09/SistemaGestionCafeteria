@@ -7,11 +7,23 @@ import javax.swing.UnsupportedLookAndFeelException;
 import Modelos.*;
 import Datos.*;
 import java.awt.BorderLayout;
+import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
+import Configuraciones.Config;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author eduardo
@@ -258,12 +270,32 @@ public class Main extends javax.swing.JFrame {
         TabReportes = new javax.swing.JTabbedPane();
         jPanel12 = new javax.swing.JPanel();
         jPanel23 = new javax.swing.JPanel();
+        lblTitulo5 = new javax.swing.JLabel();
+        btnGenerarCorteCaja = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jPanel24 = new javax.swing.JPanel();
+        lblTitulo6 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        btnGenerarReporteProductos = new javax.swing.JButton();
         jPanel14 = new javax.swing.JPanel();
         jPanel25 = new javax.swing.JPanel();
+        lblTitulo7 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        btnGenerarReporteConsumoEmpleados = new javax.swing.JButton();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        JDInicioConsumo = new com.toedter.calendar.JDateChooser();
+        JDfinConsumo = new com.toedter.calendar.JDateChooser();
         jPanel15 = new javax.swing.JPanel();
         jPanel26 = new javax.swing.JPanel();
+        lblTitulo8 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        btnGenerarReporteVentas = new javax.swing.JButton();
+        JDInicioVenta = new com.toedter.calendar.JDateChooser();
+        JDFinVenta = new com.toedter.calendar.JDateChooser();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -777,6 +809,23 @@ public class Main extends javax.swing.JFrame {
         jPanel23.setBackground(new java.awt.Color(254, 254, 254));
         jPanel23.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lblTitulo5.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
+        lblTitulo5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo5.setText("Corte de caja al dia");
+        jPanel23.add(lblTitulo5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1130, -1));
+
+        btnGenerarCorteCaja.setIcon(new javax.swing.ImageIcon("/images/crearReporte.png")); // NOI18N
+        btnGenerarCorteCaja.setText("Generar corte");
+        btnGenerarCorteCaja.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGenerarCorteCajaMouseClicked(evt);
+            }
+        });
+        jPanel23.add(btnGenerarCorteCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, 210, 50));
+
+        jLabel15.setIcon(new javax.swing.ImageIcon("/images/reporte.png")); // NOI18N
+        jPanel23.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, -1, -1));
+
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
@@ -792,6 +841,23 @@ public class Main extends javax.swing.JFrame {
 
         jPanel24.setBackground(new java.awt.Color(254, 254, 254));
         jPanel24.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblTitulo6.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
+        lblTitulo6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo6.setText("Reporte de productos");
+        jPanel24.add(lblTitulo6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1130, -1));
+
+        jLabel16.setIcon(new javax.swing.ImageIcon("/images/reporte.png")); // NOI18N
+        jPanel24.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, -1, -1));
+
+        btnGenerarReporteProductos.setIcon(new javax.swing.ImageIcon("/images/crearReporte.png")); // NOI18N
+        btnGenerarReporteProductos.setText("Generar Reporte");
+        btnGenerarReporteProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGenerarReporteProductosMouseClicked(evt);
+            }
+        });
+        jPanel24.add(btnGenerarReporteProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, 210, 50));
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -809,6 +875,31 @@ public class Main extends javax.swing.JFrame {
         jPanel25.setBackground(new java.awt.Color(254, 254, 254));
         jPanel25.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lblTitulo7.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
+        lblTitulo7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo7.setText("Reporte de consumo de empleados");
+        jPanel25.add(lblTitulo7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1130, -1));
+
+        jLabel17.setIcon(new javax.swing.ImageIcon("/images/reporte.png")); // NOI18N
+        jPanel25.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, -1, -1));
+
+        btnGenerarReporteConsumoEmpleados.setIcon(new javax.swing.ImageIcon("/images/crearReporte.png")); // NOI18N
+        btnGenerarReporteConsumoEmpleados.setText("Generar Reporte");
+        btnGenerarReporteConsumoEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGenerarReporteConsumoEmpleadosMouseClicked(evt);
+            }
+        });
+        jPanel25.add(btnGenerarReporteConsumoEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 250, 210, 50));
+
+        jLabel21.setText("Del:");
+        jPanel25.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, -1, 30));
+
+        jLabel22.setText("Al:");
+        jPanel25.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 180, 30, 30));
+        jPanel25.add(JDInicioConsumo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, 190, -1));
+        jPanel25.add(JDfinConsumo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 180, 190, -1));
+
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
@@ -824,6 +915,31 @@ public class Main extends javax.swing.JFrame {
 
         jPanel26.setBackground(new java.awt.Color(254, 254, 254));
         jPanel26.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblTitulo8.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
+        lblTitulo8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo8.setText("Reporte de ventas");
+        jPanel26.add(lblTitulo8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1130, -1));
+
+        jLabel18.setIcon(new javax.swing.ImageIcon("/images/reporte.png")); // NOI18N
+        jPanel26.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, -1, -1));
+
+        btnGenerarReporteVentas.setIcon(new javax.swing.ImageIcon("/images/crearReporte.png")); // NOI18N
+        btnGenerarReporteVentas.setText("Generar Reporte");
+        btnGenerarReporteVentas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGenerarReporteVentasMouseClicked(evt);
+            }
+        });
+        jPanel26.add(btnGenerarReporteVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 250, 210, 50));
+        jPanel26.add(JDInicioVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(482, 120, 180, -1));
+        jPanel26.add(JDFinVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(482, 180, 180, -1));
+
+        jLabel19.setText("Al:");
+        jPanel26.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, -1, 30));
+
+        jLabel20.setText("Del:");
+        jPanel26.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, -1, 30));
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -844,7 +960,7 @@ public class Main extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(TabReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 1146, Short.MAX_VALUE)
+                .addComponent(TabReportes)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -1194,6 +1310,125 @@ public class Main extends javax.swing.JFrame {
         
     }//GEN-LAST:event_BtnEliminarTicketMouseClicked
 
+    private void btnGenerarCorteCajaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarCorteCajaMouseClicked
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        String fecha = dateFormat.format(date);
+        
+        try {
+                
+                Config con = new Config();
+                Connection conn = con.getConexion();
+                
+                JasperReport report = null;
+                String path = "src/main/java/Reportes/reportCorteCaja.jasper";
+                
+                Map param = new HashMap();
+                param.put("fecha", fecha);
+                param.put("idUsuario",idUsuarioLogueado);
+
+                report = (JasperReport)JRLoader.loadObjectFromFile(path);
+                
+                JasperPrint jprint = JasperFillManager.fillReport(report,param,conn);
+                
+                JasperViewer view = new JasperViewer(jprint,false);
+                
+                view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                view.setVisible(true);
+                        
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,e);
+            }
+    }//GEN-LAST:event_btnGenerarCorteCajaMouseClicked
+
+    private void btnGenerarReporteProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarReporteProductosMouseClicked
+        try {
+                
+                Config con = new Config();
+                Connection conn = con.getConexion();
+                
+                JasperReport report = null;
+                String path = "src/main/java/Reportes/reportProductos.jasper";
+                
+                //Map param = new HashMap();
+                //param.put("id_renta", rent_number);
+
+                report = (JasperReport)JRLoader.loadObjectFromFile(path);
+                
+                JasperPrint jprint = JasperFillManager.fillReport(report,null,conn);
+                
+                JasperViewer view = new JasperViewer(jprint,false);
+                
+                view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                view.setVisible(true);
+                        
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,e);
+            }
+    }//GEN-LAST:event_btnGenerarReporteProductosMouseClicked
+
+    private void btnGenerarReporteConsumoEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarReporteConsumoEmpleadosMouseClicked
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String fecha_inicio = dateFormat.format(JDInicioConsumo.getDate());
+        String fecha_final = dateFormat.format(JDfinConsumo.getDate());
+        //JOptionPane.showMessageDialog(this,fecha_inicio+" al "+ fecha_final);
+        try {
+                
+                Config con = new Config();
+                Connection conn = con.getConexion();
+                
+                JasperReport report = null;
+                String path = "src/main/java/Reportes/reportConsumoEmpleados.jasper";
+                
+                Map param = new HashMap();
+                param.put("fecha_inicio", fecha_inicio);
+                param.put("fecha_fin", fecha_final);
+
+                report = (JasperReport)JRLoader.loadObjectFromFile(path);
+                
+                JasperPrint jprint = JasperFillManager.fillReport(report,param,conn);
+                
+                JasperViewer view = new JasperViewer(jprint,false);
+                
+                view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                view.setVisible(true);
+                        
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,e);
+            }
+    }//GEN-LAST:event_btnGenerarReporteConsumoEmpleadosMouseClicked
+
+    private void btnGenerarReporteVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarReporteVentasMouseClicked
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String fecha_inicio = dateFormat.format(JDInicioVenta.getDate());
+        String fecha_final = dateFormat.format(JDFinVenta.getDate());
+        try {
+                
+                Config con = new Config();
+                Connection conn = con.getConexion();
+                
+                JasperReport report = null;
+                String path = "src/main/java/Reportes/reporteVentas.jasper";
+                
+                Map param = new HashMap();
+                param.put("fecha_inicio", fecha_inicio);
+                param.put("fecha_fin", fecha_final);
+
+                report = (JasperReport)JRLoader.loadObjectFromFile(path);
+                
+                JasperPrint jprint = JasperFillManager.fillReport(report,param,conn);
+                
+                JasperViewer view = new JasperViewer(jprint,false);
+                
+                view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                view.setVisible(true);
+                        
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,e);
+            }
+    }//GEN-LAST:event_btnGenerarReporteVentasMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1297,6 +1532,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton BtnLimpiarPanelFormaDePago;
     private javax.swing.JButton BtnLimpiarPanelPRecioVenta;
     private javax.swing.JButton BtnLimpiarPanelTipoProductos;
+    private com.toedter.calendar.JDateChooser JDFinVenta;
+    private com.toedter.calendar.JDateChooser JDInicioConsumo;
+    private com.toedter.calendar.JDateChooser JDInicioVenta;
+    private com.toedter.calendar.JDateChooser JDfinConsumo;
     private javax.swing.JPanel PanelCajero;
     private javax.swing.JPanel PanelDeUsuarios;
     private javax.swing.JPanel PanelEmpleados;
@@ -1319,6 +1558,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTable TablaTiposDeProductos;
     private javax.swing.JButton btnBuscarEmpleado;
     private javax.swing.JButton btnEliminarEmpleado1;
+    private javax.swing.JButton btnGenerarCorteCaja;
+    private javax.swing.JButton btnGenerarReporteConsumoEmpleados;
+    private javax.swing.JButton btnGenerarReporteProductos;
+    private javax.swing.JButton btnGenerarReporteVentas;
     private javax.swing.JButton btnGuardarEmpleado;
     private javax.swing.JButton btnLimpiarFormEmpleado;
     private javax.swing.JLabel jLabel1;
@@ -1327,7 +1570,15 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1379,6 +1630,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitulo2;
     private javax.swing.JLabel lblTitulo3;
     private javax.swing.JLabel lblTitulo4;
+    private javax.swing.JLabel lblTitulo5;
+    private javax.swing.JLabel lblTitulo6;
+    private javax.swing.JLabel lblTitulo7;
+    private javax.swing.JLabel lblTitulo8;
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JTextField txtBuscarEmpleado;
     private javax.swing.JTextField txtCodigoEmpleado;
